@@ -1,0 +1,202 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px; /* Set the desired height */
+        object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+    }
+    .modal-content {
+    border: 2px solid green;  /* Green border for the modal */
+    border-radius: 10px;
+}
+
+/* User and Assistant message styles */
+.user-message {
+    background-color: #d1e7dd;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    text-align: left;
+    border: 2px solid green;  /* Green border for user messages */
+}
+
+.assistant-message {
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    text-align: left;
+    border: 2px solid red;  /* Red border for assistant messages */
+}
+
+/* Styling for list group items */
+.list-group-item {
+    border: none;
+    padding: 5px 0;
+}
+</style>
+<script>
+    function startNewChat() {
+        window.location.href = '/newchat';// Replace '/new_chat' with the URL for your new chat page
+    }
+    window.watsonAssistantChatOptions = {
+      integrationID: "2471a3ab-6e0b-4be6-a172-3304f884337b", // The ID of this integration.
+      region: "us-south", // The region your integration is hosted in.
+      serviceInstanceID: "0c9fd8e9-11cd-4ce3-9bd8-30f3209b5ff9",
+      showRestartButton: true, 
+// The ID of your service instance.
+      onLoad: async (instance) => {
+        const isMobile = window.innerWidth <= 600; // Adjust this value based on your needs
+    const baseHeight = isMobile ? '500px' : '550px'; // Set height based on mobile or desktop
+    const baseWidth = isMobile ? '300px' : '400px'; // Adjust width as needed
+
+    instance.updateCSSVariables({
+        'BASE-height': baseHeight,
+        'BASE-width': baseWidth,
+        // Adjust distance from the right if needed
+    });
+        await instance.render();
+      }
+    };
+    setTimeout(function(){
+      const t = document.createElement('script');
+      t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + 
+              (window.watsonAssistantChatOptions.clientVersion || 'latest') + 
+              "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    }, 0);
+</script>
+
+    
+    
+
+<div class="container-fluid" data-aos="fade-in">
+    <h4 id="welcome-message" class="text-center" style="color:#198754">Your History</h4>
+    <hr class="my-4" style="border-top: 5px solid #198754; z-index: inherit;">
+
+    <div class="row">
+        {% if disease_data %}
+        {% for history in disease_data %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100" style="border: 2px solid green;">
+                <img src="{{ history['image_url'] }}" class="card-img-top" alt="Disease Image">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ history['predictions']['label'] }}</h5>
+                    <p class="card-text">Confidence: {{ history['predictions']['confidences'][0]['confidence'] * 100 }}%</p>
+                    <div class="mt-auto">
+                        <ul class="list-group list-group-flush">
+                            {% for confidence in history['confidences'] %}
+                            <li class="list-group-item">{{ confidence['label'] }}: {{ confidence['confidence'] * 100 }}%</li>
+                            {% endfor %}
+                        </ul>
+                        <div class="card-footer">
+                            <!-- Display formatted timestamp here -->
+                            <button class="btn btn-outline-success mt-3 w-100" onclick="viewChatHistory('{{history['email']}}', '{{history['session_id']}}')">
+                                View Chat History
+                            </button>
+                            <small class="text-muted" data-timestamp="{{ history['timestamp'] }}"></small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="text-center">
+            <p style="font-weight: bold;color:#198754;font-size:20px">Nothing in history.</p>
+            <button class="btn btn-outline-success mt-3" onclick="startNewChat()">New Chat <i class="bx bx-plus-medical"></i></button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="modal fade" id="chatHistoryModal" tabindex="-1" aria-labelledby="chatHistoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="chatHistoryModalLabel">Chat History</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="chatHistoryContent" class="list-group">
+            <!-- Messages will be dynamically added here -->
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+    function viewChatHistory(email, session_id) {
+    fetch('/get-chat-history', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, session_id: session_id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error(data.error);
+        } else {
+            // Clear the existing chat history content
+            const chatHistoryContent = document.getElementById('chatHistoryContent');
+            chatHistoryContent.innerHTML = '';
+
+            // Loop through the messages and add them to the modal
+            data.messages.forEach((message) => {
+                const messageItem = document.createElement('li');
+                messageItem.classList.add('list-group-item', 'd-flex');
+                
+                // Check if the message is from the user or the assistant
+                if (message.from === 'You') {
+    messageItem.classList.add('justify-content-start');
+    messageItem.innerHTML = `
+        <div class="user-message">
+            <strong>${message.from}:</strong><br> ${message.message}
+        </div>`;
+} else {
+    messageItem.classList.add('justify-content-end');
+    messageItem.innerHTML = `
+        <div class="assistant-message">
+            <strong>VITA:</strong><br> ${message.message}
+        </div>`;
+}
+
+
+                chatHistoryContent.appendChild(messageItem);
+            });
+
+            // Show the modal
+            const chatHistoryModal = new bootstrap.Modal(document.getElementById('chatHistoryModal'));
+            chatHistoryModal.show();
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to format the timestamp
+        function formatTimestamp(ts) {
+            const date = new Date(ts);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${day}-${month}-${year} ${hours}:${minutes}`;
+        }
+
+        // Iterate over each card to format timestamps
+        document.querySelectorAll('.card-footer small').forEach(function (element) {
+            const timestamp = element.getAttribute('data-timestamp');
+            element.textContent = `Timestamp: ${formatTimestamp(timestamp)}`;
+        });
+    });
+</script>
+
+{% endblock %}

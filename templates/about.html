@@ -1,0 +1,93 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<style>
+.img-fixed-size {
+    width: 100%;  /* Ensures the image takes the full width of the card */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Ensures the image maintains aspect ratio and fits inside the div */
+}</style>
+
+        <script>
+          const customElement = document.querySelector('#WebChatContainer');
+          window.watsonAssistantChatOptions = {
+            integrationID: "2471a3ab-6e0b-4be6-a172-3304f884337b", // The ID of this integration.
+            region: "us-south", // The region your integration is hosted in.
+            serviceInstanceID: "0c9fd8e9-11cd-4ce3-9bd8-30f3209b5ff9",
+            element: customElement,
+     // The ID of your service instance.
+            onLoad: async (instance) => {
+              const isMobile = window.innerWidth <= 600; // Adjust this value based on your needs
+        const baseHeight = isMobile ? '500px' : '550px'; // Set height based on mobile or desktop
+        const baseWidth = isMobile ? '300px' : '550px'; // Adjust width as needed
+    
+        instance.updateCSSVariables({
+            'BASE-height': baseHeight,
+            'BASE-width': baseWidth,
+            // Adjust distance from the right if needed
+        });
+              await instance.render();
+            }
+          };
+          setTimeout(function(){
+            const t = document.createElement('script');
+            t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + 
+                    (window.watsonAssistantChatOptions.clientVersion || 'latest') + 
+                    "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+          }, 0); // Added a delay of 0 ms to ensure it runs asynchronously
+        </script>
+<div class="container-fluid" data-aos="fade-in">
+    <h4 id="welcome-message" class="text-center" style="color:#198754">About This Bot</h4>
+    <hr class="my-4" style="border-top: 5px solid #198754; z-index: inherit;">
+    <p class="mb-4 text-left">
+        Welcome to the About page! At VITA (Virtual Interactive Treatment Advisor), we're committed to revolutionizing healthcare accessibility, especially for rural and underserved communities. Our AI-powered healthcare chatbot is designed to break down barriers to quality healthcare by leveraging cutting-edge technology, including image recognition and natural language processing. With a vast database of medical knowledge and continuous learning capabilities, our chatbot provides personalized and actionable advice, helping users manage their health effectively. We're passionate about empowering individuals to take control of their well-being, no matter where they are.
+    </p>
+
+    <h4 class="my-4">Diseases Covered:</h4>
+    <div class="row">
+        <!-- Disease Card 1 -->
+        {% for disease in disease_data %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100" style="border: 2px solid green;">
+                <img src="{{ url_for('static', filename='AboutUsPics/' + disease.image) }}" class="card-img-top img-fixed-size" alt="{{ disease.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ disease.name }}</h5>
+                    <p class="card-text">{{ disease.description }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+<script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "2471a3ab-6e0b-4be6-a172-3304f884337b", // The ID of this integration.
+      region: "us-south", // The region your integration is hosted in.
+      serviceInstanceID: "0c9fd8e9-11cd-4ce3-9bd8-30f3209b5ff9",
+      showRestartButton: true, 
+// The ID of your service instance.
+      onLoad: async (instance) => {
+        const isMobile = window.innerWidth <= 600; // Adjust this value based on your needs
+    const baseHeight = isMobile ? '400px' : '550px'; // Set height based on mobile or desktop
+    const baseWidth = isMobile ? '300px' : '400px'; // Adjust width as needed
+
+    instance.updateCSSVariables({
+        'BASE-height': baseHeight,
+        'BASE-width': baseWidth,
+        // Adjust distance from the right if needed
+    });
+        await instance.render();
+      }
+    };
+    setTimeout(function(){
+      const t = document.createElement('script');
+      t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + 
+              (window.watsonAssistantChatOptions.clientVersion || 'latest') + 
+              "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    }, 0);
+</script>
+
+<!-- Google Translate Initialization -->
+
+{% endblock %}

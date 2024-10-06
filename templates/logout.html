@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo/vita.ico') }}">
+    <title>Logout</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_register.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <style>
+        .logout-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ECECEC;
+        }
+        .logout-wrapper h3 {
+            margin-bottom: 20px;
+        }
+        .logout-wrapper .btn {
+            margin-top: 10px;
+        }
+        .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: auto; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+.modal-content {
+    background-color: #fff; /* White background */
+    margin: 15% auto; /* Center the modal */
+    padding: 20px; /* Padding inside modal */
+    border: 1px solid #888; /* Border around modal */
+    width: 300px; /* Modal width */
+    text-align: center; /* Center text */
+}
+
+/* Close button styles */
+.close {
+    color: #000000; /* Light gray */
+    float: right; /* Float to the right */
+    font-size: 28px; /* Font size */
+    font-weight: bold; /* Bold font */
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    display: none !important; /* Use !important to override any inline styles */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Dark color on hover */
+    text-decoration: none; /* No underline */
+    cursor: pointer; /* Pointer cursor */
+}
+
+/* Google Translate styles */
+.goog-te-banner-frame {
+    display: none !important; /* Hide the default top banner */
+}
+
+.goog-te-gadget img {
+    vertical-align: middle; /* Align the Google icon */
+}
+
+.goog-te-gadget {
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-size: 14px; /* Font size */
+    color: #333; /* Text color */
+}
+
+.goog-te-combo {
+    width: 100%; /* Full width for dropdown */
+    padding: 5px; /* Add some padding */
+    background-color: #f2f2f2; /* Background color for dropdown */
+    border: 1px solid #ddd; /* Border around dropdown */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Container for Google Translate */
+#google_translate_element {
+    margin-top: 20px; /* Adjust vertical position */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    padding: 20px; /* Padding around element */
+    border: 1px solid #ccc; /* Border around the widget */
+    background-color: #f9f9f9; /* Background color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+}
+
+/* Reset translation button styles */
+/* Circular button styles */
+.circular-btn {
+    width: 60px; /* Responsive width */
+    height: 60px; /* Responsive height */
+    max-width: 55px; /* Max width to prevent it from getting too large */
+    max-height: 55px; /* Max height to prevent it from getting too large */
+    border-radius: 50%; /* Circular button */
+    background-color: #007bff; /* Button background color */
+    border: none; /* No border */
+    position: fixed; /* Fixed position */
+    bottom: 4.5%; /* Distance from the bottom */
+    left: 4.5%; /* Distance from the left */
+    display: flex; /* Flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+    color: white; /* Icon color */
+    font-size: 2.5vw;
+    z-index:1000; /* Responsive icon size */
+}
+
+/* Hover effect for circular button */
+.circular-btn:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}
+
+/* Icon inside the circular button */
+.circular-btn i {
+    margin: 0; /* No margin */
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+    .circular-btn {
+       /* Slightly larger on small screens */
+        font-size: 3vw; 
+        z-index:1000;/* Responsive font size for icon */
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="logout-wrapper">
+    <h3>You have been logged out</h3>
+    <p >Thank you for using our service.</p>
+    <a href="{{ url_for('login') }}" class="btn btn-outline-success">
+        <i class="bi bi-box-arrow-in-right"></i> Login Again
+    </a>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+        <i class="bi bi-house-door"></i> Landing Page
+    </a>
+</div>
+
+</body>
+</html>

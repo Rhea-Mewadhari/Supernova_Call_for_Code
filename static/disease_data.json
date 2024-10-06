@@ -1,0 +1,93 @@
+[
+    {
+        "image": "Gingivitis.jpg",
+        "name": "Gingivitis",
+        "description": "Gum Disease. Occurs when plaque and bacteria build up on your teeth and cause infection."
+    },
+    {
+        "image": "MouthUlcer.jpg",
+        "name": "Mouth Ulcers",
+        "description": "One or more painful sores on inner lips, gums, tongue, roof of the mouth or throat that may interfere with eating, such as a canker sore."
+    },
+    {
+        "image": "ToothDiscolouration.jpg",
+        "name": "Tooth Discolouration",
+        "description": "The staining or darkening of teeth."
+    },
+    {
+        "image": "Abrasion.png",
+        "name": "Abrasions",
+        "description": "An area damaged by scraping or wearing away."
+    },
+    {
+        "image": "Bruise.jpg",
+        "name": "Bruises",
+        "description": "An injury appearing as an area of discoloured skin on the body, caused by a blow or impact rupturing underlying blood vessels."
+    },
+    {
+        "image": "Burn.jpg",
+        "name": "Burns",
+        "description": "An injury caused by exposure to heat or flame (first and second degrees only)."
+    },
+    {
+        "image": "Cuts.jpg",
+        "name": "Cuts/Lacerations",
+        "description": "A deep cut or tear in skin or flesh."
+    },
+    {
+        "image": "DiabeticWounds.jpg",
+        "name": "Diabetic Wounds",
+        "description": "A serious complication caused by a combination of poor circulation, susceptibility to infection and nerve damage from high blood sugar levels."
+    },
+    {
+        "image": "SurgicalWounds.jpg",
+        "name": "Surgical Wounds",
+        "description": "A cut through the skin made during surgery."
+    },
+    {
+        "image": "VenousWound.jpg",
+        "name": "Venous Wounds",
+        "description": "A wound on the leg or ankle caused by abnormal or damaged veins."
+    },
+    {
+        "image": "Cellulitis.jpg",
+        "name": "Cellulitis",
+        "description": "Skin condition that causes lumpy, dimpled flesh on the thighs, hips, buttocks and abdomen."
+    },
+    {
+        "image": "Impetigo.jpg",
+        "name": "Impetigo",
+        "description": "A contagious bacterial skin infection forming pustules and yellow crusty sores."
+    },
+    {
+        "image": "AthletesFoot.png",
+        "name": "Athlete’s Foot",
+        "description": "A fungal infection that usually begins between the toes."
+    },
+    {
+        "image": "NailFungus.jpg",
+        "name": "Nail Fungus",
+        "description": "Fungal infection of the nail."
+    },
+    {
+        "image": "RingWorm.jpg",
+        "name": "Ringworm",
+        "description": "A highly contagious fungal infection of the skin or scalp."
+    },
+    {
+        "image": "CutaneousLarvaMigran.jpg",
+        "name": "Cutaneous Larva Migran",
+        "description": "An infectious syndrome caused by multiple types of hookworms."
+    },
+    {
+        "image": "ChickenPox.png",
+        "name": "Chicken Pox",
+        "description": "A highly contagious viral infection causing an itchy, blister-like rash on the skin."
+    },
+    {
+        "image": "Shringles.jpeg",
+        "name": "Shingles",
+        "description": "Painful, usually itchy, rash that develops on one side of the face or body."
+    }
+    
+]

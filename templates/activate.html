@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo/vita.ico') }}">
+    <title>Confirm Your Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+        }
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .email-container h1 {
+            color: #28a745; /* Green for a healthcare theme */
+        }
+        .email-container p {
+            font-size: 16px;
+            color: #666666;
+        }
+        .email-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745; /* Match button color with healthcare theme */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h1>You’re Almost There!</h1>
+        <p>Hey {{ user_name }},</p>
+        <p>Welcome aboard the VITA family! 🌟 Before we get you started on this amazing healthcare journey, let’s confirm that you’re really you! 😎</p>
+        <p>Just click the link below to verify your email, and you’re all set to explore health tips, get personalized advice, and more.</p>
+        <p><a href="{{ confirm_url }}">📧 Confirm My Email</a></p>
+        <p>Thanks for trusting us with your healthcare needs—we can’t wait to start this adventure with you!</p>
+        <p>Healthy vibes,<br>The VITA Team 💚</p>
+    </div>
+</body>
+</html>
+
