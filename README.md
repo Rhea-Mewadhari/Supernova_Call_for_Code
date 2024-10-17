@@ -1,14 +1,5 @@
-[![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Community](https://img.shields.io/badge/Join-Community-blue)](https://developer.ibm.com/callforcode/solutions/projects/get-started/)
 
-_INSTRUCTIONS: This GitHub repository serves as a template and example you can use to create a well documented README for your project for the [2024 Call for Code Global Challenge](https://developer.ibm.com/callforcode/global-challenge/)._
-
-Your required deliverables and project descriptions should be officially submitted to your My Team > Submissions section of the [Call for Code Global Challenge web site](https://compete.callforcode.skillsnetwork.site/competitions/2024-call-for-code-global-challenge), but you can also optionally include them here for completeness, as it is good practice to clearly document your project in your README file. Replace the examples seen here with your own deliverable links.
-
-Use the **Use this template** button to create a new version of this repository and start entering content for your own Call for Code submission project. Make sure you have [registered for the 2024 Call for Code Global Challenge](https://www.ibm.com/account/reg/signup?formid=urx-52643) to access resources and full project submission instructions. Remove any "INSTRUCTIONS" sections when you are ready to submit your project.
-
-_New to Git and GitHub? This free online course will get you up to speed quickly: [Getting Started with Git and GitHub](https://www.coursera.org/learn/getting-started-with-git-and-github)_.
-
-# Replace this heading with your team/submission name
+# SuperNova/VITA
 
 - [Project summary](#project-summary)
   - [The issue we are hoping to solve](#the-issue-we-are-hoping-to-solve)
@@ -31,21 +22,35 @@ _New to Git and GitHub? This free online course will get you up to speed quickly
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
 
-_INSTRUCTIONS: Below are the suggested sections to include in your README file to make sure your project is well documented. You can remove this instruction text._
+
 
 ## Project summary
 
 ### The issue we are hoping to solve
+Limited healthcare accessibility in communities, particularly rural areas, has become a critical issue. These areas need more doctors and medical practitioners, making it difficult for residents to receive timely and effective medical care.
 
-REPLACE THIS SENTENCE with a short description, 2-3 sentences in length, of the specific sustainability problem your solution is meant to address.
 
 ### How our technology solution can help
 
-REPLACE THIS SENTENCE with a short description of your team's solution, in about 10 words.
+We developed a web application allowing users to upload images and describe their symptoms, providing a diagnosis and treatment suggestions.
 
 ### Our idea
 
-INSTRUCTIONS: Replace this paragraph with a longer description of your solution. In about 500 words, describe your solution in more detail. Include the real-world problem you identified, describe the technological solution you have created, and explain how it’s an improvement over existing solutions. You can supply additional documentation in this source code repository that you link to as well.
+Our solution, a pioneering AI-powered web application, seeks to revolutionize healthcare accessibility in all communities, especially rural communities. Recognizing the critical shortage of doctors and skilled medical practitioners in these areas, we have developed a technology that leverages artificial intelligence to provide timely medical advice and support to individuals who lack easy access to healthcare facilities.
+
+Despite progress in digital healthcare, there's still a lack of research on at-home treatment suggestion systems. While some platforms offer remote consultations, none provide personalized treatment options based on user-uploaded images and descriptions. Filling this gap presents a chance to develop a unique solution for people seeking care. Using a technological solution, we aim to address this gap.
+
+At the heart of our solution lies a user-friendly web app interface accessible via smartphones or computers. This interface allows users to interact with the system by either uploading images of their medical issues and inputting descriptions of their symptoms, ensuring that individuals with varying levels of technological proficiency can easily utilize the service.
+
+The process begins when a user initiates a conversation with the chatbot, typically by uploading images of their medical condition. The chatbot employs three convolutional neural networks (CNNs) to enhance accuracy. Our main classification model GoogleLeNet, boasting an accuracy of 86.22%, analyses the images to identify key features and patterns indicative of specific medical conditions. Additionally, two supporting CNNs — image enhancement (U-Net) and light adjustment models (CIDNet) — further refine the images, ensuring that diagnostic accuracy remains high. This multi-layered approach guarantees the best possible analysis regardless of the quality or condition of the uploaded images.
+
+Simultaneously, we utilize text inputs to gather insight into user symptoms. Once the user's input is processed, a rule-based system provides the user with valid treatment suggestions. Additionally, the web app incorporates Retrieval-Augmented Generation (RAG) to continuously provide the most up-to-date and relevant information using natural language processing (NLP) to understand and answer user concerns. The chatbot consults a vast database created in collaboration with healthcare practitioners and medical journals to ensure accurate responses. 
+
+Our solution also has multilingual capabilities and cross-device compatibility, ensuring it reaches diverse populations with ease. The chatbot's responses are designed to be both informative and actionable. For straightforward, non-urgent cases, it may offer self-care advice or recommend over-the-counter medications. In more serious cases, the chatbot advises users to seek medical attention from a healthcare practitioner.
+Additionally, the web app provides users with the ability to revisit their previous consultations. This feature enables users to easily access a detailed history of their past interactions with the system, including the treatment suggestions they received during those consultations. This feature empowers users and healthcare practitioners to make informed decisions about their health based on their treatment history.
+
+In summary, our AI-powered web app represents a groundbreaking solution to healthcare access challenges. By harnessing artificial intelligence, including CNN models, machine learning, RAG, multilingual capabilities, and more, we empower individuals to manage their health and well-being regardless of geographic location or access to traditional healthcare facilities.
+
 
 More detail is available in our [description document](./docs/DESCRIPTION.md).
 
