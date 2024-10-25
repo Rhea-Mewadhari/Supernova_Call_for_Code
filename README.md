@@ -295,7 +295,7 @@ Replace the following placeholders with your own credentials:
 ```bash
 SECRET_KEY: A secret key used by Flask for session management and CSRF protection.
 URI: Your MongoDB Atlas connection string.
-MAIL_SERVER: SMTP server for sending emails (Gmail's is smtp.gmail.com).
+MAIL_SERVER: SMTP server for sending emails (Gmail is smtp.gmail.com).
 MAIL_USE_TLS: Set to True to enable TLS encryption for email.
 MAIL_USERNAME: Your email address for sending notifications.
 MAIL_PASSWORD: The password or app-specific password for the email account.
