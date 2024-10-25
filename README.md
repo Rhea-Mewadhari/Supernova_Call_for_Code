@@ -49,7 +49,7 @@ Additionally, the web app provides users with the ability to revisit their previ
 In summary, our AI-powered web app represents a groundbreaking solution to healthcare access challenges. By harnessing artificial intelligence, including CNN models, machine learning, RAG, multilingual capabilities, and more, we empower individuals to manage their health and well-being regardless of geographic location or access to traditional healthcare facilities.
 
 
-More detail is available in our [description documents](https://github.com/nkshash/miscellaneous).
+More detail is available in our [description documents](https://nkshash.github.io/miscellaneous/).
 
 ## Technology implementation
 
