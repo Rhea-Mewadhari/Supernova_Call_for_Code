@@ -110,8 +110,6 @@ Diagram and step-by-step description of the flow of our solution:
 
 ## Presentation materials
 
-_INSTRUCTIONS: The following deliverables should be officially posted to your My Team > Submissions section of the [Call for Code Global Challenge resources site](https://cfc-prod.skillsnetwork.site/), but you can also include them here for completeness. Replace the examples seen here with your own deliverable links._
-
 ### Solution demo video
 
 [![Watch the video](https://raw.githubusercontent.com/Liquid-Prep/Liquid-Prep/main/images/readme/IBM-interview-video-image.png)](https://youtu.be/vOgCOoy_Bx0)
@@ -120,15 +118,32 @@ _INSTRUCTIONS: The following deliverables should be officially posted to your My
 
 The project currently does the following things.
 
-- Feature 1
-- Feature 2
-- Feature 3
+**Intuitive Design :** VITA is designed with an intuitive, user-friendly interface to ensure ease of navigation for users across all technological proficiency levels. The clean layout makes it simple for users to interact with the chatbot, ensuring a seamless experience.
 
-In the future we plan to...
+**Responsive Design :** The app incorporates responsive design principles, optimizing the interface for a variety of devices, including smartphones, tablets, and computers, ensuring a consistent experience across different platforms.
 
-See below for our proposed schedule on next steps after Call for Code 2024 submission.
+**Symptom Image Upload :** VITA integrates image recognition technology that allows users to upload images of medical conditions, such as skin issues or wounds, to visually convey their symptoms to the chatbot.
 
-![Roadmap](./images/roadmap.jpg)
+**Deep Learning Models for Diagnosis :** Using advanced deep learning models, the app analyzes key features and patterns in uploaded medical images, facilitating accurate diagnoses and providing appropriate treatment recommendations.
+
+**Catering to Diverse Users :** VITA offers multilingual support to address the diverse linguistic needs of users, particularly in rural and underserved communities, making it accessible to a broader population.
+
+**Extensive Knowledge Base :** VITA features a comprehensive medical database with detailed information on a wide range of medical conditions, symptoms, treatments, and guidelines, ensuring users have access to reliable health information.
+
+**Intelligent Question-Answering System :** After providing treatment suggestions and diagnoses, VITA integrates Retrieval-Augmented Generation (RAG) technology to address any additional questions the user may have. By combining real-time data retrieval with generative AI capabilities, the chatbot delivers comprehensive and accurate answers related to the user’s health condition.
+
+
+**Evidence-Based Information :** With RAG, VITA can provide users with supporting evidence and references for treatment suggestions, pulling in up-to-date medical information, research, and guidelines to ensure users receive reliable, evidence-based advice.
+
+**Access to Past Conversations :** VITA allows users to view their history and past conversations with the bot. Users can revisit previous interactions, medical inquiries, and chatbot responses for future reference.
+
+**Symptom and Diagnosis History :** Users can access their previous symptom uploads and the corresponding diagnoses provided by the chatbot. This feature helps users track their health conditions and the recommendations they've received over time.
+
+**Chat History Management :** The platform stores and organizes chat histories, enabling users to easily navigate through their previous medical consultations. This functionality is particularly helpful for long-term health monitoring and continuity of care.
+
+See below for our roadmap.
+
+![Roadmap](https://drive.usercontent.google.com/download?id=1zOQlHRVIhx_PThABxVQe1WllVVTsAZGo&export=view&authuser=0)
 
 ## Additional details
 
