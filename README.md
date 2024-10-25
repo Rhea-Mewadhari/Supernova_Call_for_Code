@@ -112,7 +112,7 @@ Diagram and step-by-step description of the flow of our solution:
 
 ### Solution demo video
 
-[![Watch the video](https://raw.githubusercontent.com/Liquid-Prep/Liquid-Prep/main/images/readme/IBM-interview-video-image.png)](https://youtu.be/vOgCOoy_Bx0)
+[![Watch the video](https://drive.usercontent.google.com/download?id=1MazInMg5Sv_JqL4hq5OS9pOw5KmUHdSH&export=view&authuser=0)](https://youtu.be/Xw3OYLcUsSI)
 
 ### Project development roadmap
 
@@ -141,7 +141,75 @@ The project currently does the following things.
 
 **Chat History Management :** The platform stores and organizes chat histories, enabling users to easily navigate through their previous medical consultations. This functionality is particularly helpful for long-term health monitoring and continuity of care.
 
+# VITA (Virtual Interactive Treatment Advisor) - Future Work
+
+## Expansion of Medical Content (Retinal Diseases)
+
+### Broader Medical Database
+- Continuously update and expand VITA’s medical database to cover a wider spectrum of medical conditions, treatments, and evidence-based guidelines, including retinal diseases and other specialized areas of healthcare.
+
+### Incorporating New Research
+- Ensure VITA remains aligned with the latest healthcare advancements by incorporating emerging medical research and evidence-based practices. This will help maintain accuracy and reliability in the chatbot’s recommendations.
+
+## Integration with Electronic Health Records (EHR)
+
+### EHR System Integration
+- Explore opportunities to integrate VITA with existing Electronic Health Record (EHR) systems, allowing for seamless data sharing between healthcare providers and the chatbot platform. This would facilitate more efficient consultations and data-informed treatment options.
+
+### Data Interoperability
+- Enhance interoperability and data exchange standards to ensure the secure transfer of patient information while complying with healthcare regulations, including HIPAA and GDPR.
+
+## Personalized Health Recommendations
+
+### Tailored Health Strategies
+- Develop personalized health recommendations by analyzing users’ individual medical history, profiles, and risk factors. This will allow for tailored preventive care strategies, including lifestyle changes, screening schedules, and wellness tips.
+
+### Machine Learning for Personalization
+- Leverage advanced machine learning algorithms to analyze user data and provide customized health advice that adapts to individual preferences, promoting overall well-being and proactive healthcare management.
+
+## Virtual Health Monitoring
+
+### Health Metric Tracking
+- Expand VITA’s capabilities to include virtual and remote patient health monitoring, allowing users to track their health metrics (e.g., heart rate, blood pressure) through the chatbot platform, receiving personalized insights and health alerts based on their data.
+
+### Wearable Device Integration
+- Integrate VITA with wearable devices and sensors to collect real-time health data, enabling proactive monitoring of chronic conditions and providing users with actionable insights for better health management.
+
+## Community Health Initiatives
+
+### Collaborative Health Programs
+- Partner with community organizations, local healthcare providers, and authorities to launch health education programs and community outreach initiatives, promoting health awareness and preventive care through VITA.
+
+### Targeted Outreach for Underserved Communities
+- Tailor health education and preventive care interventions to address the unique needs of rural and underserved populations, contributing to improved health outcomes and increased healthcare accessibility.
+
+## Enhanced Accessibility and Inclusivity
+
+### Accessible Design for All Users
+- Improve accessibility features to accommodate users with disabilities or special needs, ensuring equitable access to healthcare information and services. This includes the development of text-to-speech, voice command capabilities, and visual aids.
+
+### Inclusive Design
+- Conduct usability testing and research to identify potential barriers to access for diverse users, implementing inclusive design solutions that address specific challenges faced by users with disabilities or technological limitations.
+
+## Ethical and Responsible AI Practices
+
+### Transparency and Accountability
+- Prioritize ethical AI practices in VITA’s development by ensuring transparency in algorithms and decision-making processes. VITA will incorporate responsible AI principles, ensuring fairness and accountability in its interactions with users.
+
+### Data Privacy and Consent
+- Establish clear guidelines for data privacy, informed consent, and algorithmic transparency, upholding user trust and ensuring compliance with legal and ethical standards in the healthcare industry.
+
+## Remote Consultations and Triage
+
+### Virtual Consultations
+- VITA enables users to engage in remote consultations with healthcare professionals through the platform. This feature allows timely medical advice and guidance, especially for users in remote or underserved areas.
+
+### Triage Functionality
+- The app includes triaging capabilities, assessing the severity and urgency of medical cases. Based on the assessment, users are directed to the appropriate level of care, whether self-care advice, medical attention, or emergency services.
+
+
 See below for our roadmap.
+
 
 ![Roadmap](https://drive.usercontent.google.com/download?id=1zOQlHRVIhx_PThABxVQe1WllVVTsAZGo&export=view&authuser=0)
 
