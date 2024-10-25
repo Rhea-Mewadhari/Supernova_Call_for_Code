@@ -67,6 +67,8 @@ _INSTRUCTIONS: Included here is a list of IBM watsonx products. Remove any produ
 - [watsonx Assistant](https://cloud.ibm.com/catalog/services/watsonx-assistant) -  In VITA, Watsonx Assistant is central to user engagement, providing a conversational interface for users to interact with the system. One of its key roles is in conducting severity analysis through a rule-based system. This system operates by analyzing the user's initial responses to health-related queries, applying predefined medical guidelines, and decision rules to assess the severity of symptoms. Factors such as symptom duration, intensity, and risk indicators are processed to categorize the condition as mild, moderate, or critical. This allows VITA to determine the urgency of a user's condition.
 In addition to severity analysis, VITA allows users to ask follow-up or additional questions beyond the initial assessment. For these more complex or detailed inquiries, Retrieval-Augmented Generation (RAG) is employed. Watsonx Machine Learning retrieves relevant information from a curated medical knowledge base and generates accurate, contextually relevant responses to users' questions. This ensures that users can receive comprehensive answers to specific medical concerns, enhancing the user experience by providing both rule-based assessments and AI-generated insights.
 By combining a rule-based severity analysis system with RAG for additional queries, Watsonx Assistant in VITA offers a robust and versatile health support system, ensuring both quick triage for urgent cases and detailed, data-driven responses for broader medical inquiries.
+
+
 **1. Main Diagnostic Assistant (New Chat Template)**: On the dedicated New Chat Template, Watsonx Assistant is responsible for handling the core diagnostic functions, including severity analysis. This assistant collects user input regarding symptoms, health concerns, and other relevant data. The assistant uses a rule-based system to analyze the severity of the symptoms by comparing them to predefined medical guidelines and thresholds. 
 
 **2. Helper Assistant (All Other Templates)**: The second instance of Watsonx Assistant is a web app assistant, available on all templates except the New Chat template. This assistant is designed to guide users through the functionality of the VITA web application. It helps users understand how to navigate the platform, how to start new conversations with the diagnostic assistant, and how to access other features such as reviewing past interactions, managing their profile, or using other tools within the system. This assistant enhances the user experience by providing clear and immediate assistance on how to use the web application effectively, ensuring a seamless user journey with VITA.
@@ -95,10 +97,15 @@ Diagram and step-by-step description of the flow of our solution:
 ![Vita _app](https://drive.usercontent.google.com/download?id=1FxTiz0E5y6oB66PCXtLNG7Y1kuNc70Cd&export=view&authuser=0)
 
 **1. User Registration/Login & Navigation:** Users can register or log in to the site. Upon registration, the user’s details are automatically updated in the database. After login, users can navigate the site seamlessly.
+
 **2. Image Upload & Disease Classification:** Users upload an image of a disease, which is processed by a machine learning model. The model enhances the image if necessary and classifies the disease.
+
 **3. Integration with Watsonx Assistant:** The classification result is sent to the Watsonx Assistant chatbot, which initiates an interaction with the user based on the disease classification.
+
 **4. Chatbot Analysis & Treatment Recommendations:** Watsonx Assistant asks relevant questions to assess the severity of the condition and provides treatment suggestions based on the responses.
+
 **5. Machine Learning-Powered Answers:** If the user has additional questions, watsonx’s machine learning capabilities are utilized to generate accurate answers.
+
 **6. Data Storage & Accessibility:** The entire conversation, including the uploaded image and classification details, is saved in the database. Users can view this information at any time.
 
 ## Presentation materials
