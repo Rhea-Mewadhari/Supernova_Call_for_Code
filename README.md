@@ -16,11 +16,8 @@
   - [How to run the project](#how-to-run-the-project)
   - [Live demo](#live-demo)
 - [About this template](#about-this-template)
-  - [Contributing](#contributing)
-  - [Versioning](#versioning)
   - [Authors](#authors)
-  - [License](#license)
-  - [Acknowledgments](#acknowledgments)
+  
 
 
 
@@ -118,28 +115,87 @@ Diagram and step-by-step description of the flow of our solution:
 
 The project currently does the following things.
 
-**Intuitive Design :** VITA is designed with an intuitive, user-friendly interface to ensure ease of navigation for users across all technological proficiency levels. The clean layout makes it simple for users to interact with the chatbot, ensuring a seamless experience.
+**1. Image-based Disease Prediction**
 
-**Responsive Design :** The app incorporates responsive design principles, optimizing the interface for a variety of devices, including smartphones, tablets, and computers, ensuring a consistent experience across different platforms.
+- Upload images for real-time analysis to identify potential diseases or health concerns.
+- Uses deep learning models to detect patterns in medical images, ensuring accurate diagnoses.
 
-**Symptom Image Upload :** VITA integrates image recognition technology that allows users to upload images of medical conditions, such as skin issues or wounds, to visually convey their symptoms to the chatbot.
+**2. Personalized Health Strategies**
 
-**Deep Learning Models for Diagnosis :** Using advanced deep learning models, the app analyzes key features and patterns in uploaded medical images, facilitating accurate diagnoses and providing appropriate treatment recommendations.
+- Provides tailored health recommendations based on the analysis results.
+- Users receive advice for treatment and lifestyle adjustments based on their health condition.
 
-**Catering to Diverse Users :** VITA offers multilingual support to address the diverse linguistic needs of users, particularly in rural and underserved communities, making it accessible to a broader population.
+**3. Chatbot Integration**
 
-**Extensive Knowledge Base :** VITA features a comprehensive medical database with detailed information on a wide range of medical conditions, symptoms, treatments, and guidelines, ensuring users have access to reliable health information.
+- Powered by IBM Watson Assistant, VITA offers a virtual health assistant to answer any health-related questions.
+- Users can engage with the chatbot for immediate responses, diagnosis explanations, and additional health information.
 
-**Intelligent Question-Answering System :** After providing treatment suggestions and diagnoses, VITA integrates Retrieval-Augmented Generation (RAG) technology to address any additional questions the user may have. By combining real-time data retrieval with generative AI capabilities, the chatbot delivers comprehensive and accurate answers related to the user’s health condition.
+**4. History Tracking**
 
+- Users can access past interactions with the chatbot, including previous health inquiries and image-based diagnosis results.
+- Symptom upload history is saved for future reference, helping users monitor their health over time.
 
-**Evidence-Based Information :** With RAG, VITA can provide users with supporting evidence and references for treatment suggestions, pulling in up-to-date medical information, research, and guidelines to ensure users receive reliable, evidence-based advice.
+**5. Cloudinary Image Hosting**
 
-**Access to Past Conversations :** VITA allows users to view their history and past conversations with the bot. Users can revisit previous interactions, medical inquiries, and chatbot responses for future reference.
+- Securely upload and store images using Cloudinary for analysis and reference.
+- Ensures fast, reliable access to user-uploaded medical images across devices.
 
-**Symptom and Diagnosis History :** Users can access their previous symptom uploads and the corresponding diagnoses provided by the chatbot. This feature helps users track their health conditions and the recommendations they've received over time.
+**6. Email Notifications**
 
-**Chat History Management :** The platform stores and organizes chat histories, enabling users to easily navigate through their previous medical consultations. This functionality is particularly helpful for long-term health monitoring and continuity of care.
+- Get email updates with reports, health advice, and treatment suggestions.
+- Users are notified of new analyses or recommendations directly in their inbox.
+
+**7. User Authentication**
+
+- Secure login with Firebase authentication, supporting both Google and Microsoft accounts.
+- Ensures user data is safe, while providing seamless access to the platform.
+
+**8. MongoDB Atlas**
+
+- Stores all user data, including uploaded images, analysis results, and chat history.
+- Cloud-based database ensures scalability and secure data management.
+
+**9. Intuitive Design**
+
+- VITA offers an easy-to-use, clean interface for users of all technological proficiency levels.
+- Simple navigation ensures users can interact with the chatbot, upload images, and access health data effortlessly.
+
+**10. Responsive Design**
+
+- Optimized for smartphones, tablets, and desktops to provide a consistent user experience across devices.
+- The responsive interface adapts to different screen sizes, ensuring a seamless experience on mobile devices.
+
+**11. Multilingual Support**
+
+- VITA caters to users from diverse linguistic backgrounds, particularly in underserved communities.
+- By offering multilingual support, VITA expands access to healthcare advice.
+
+**12. Extensive Medical Knowledge Base**
+
+- A rich medical database that includes detailed information on various conditions, symptoms, and treatment options.
+- Provides users with accurate, evidence-based medical information.
+
+**13. Retrieval-Augmented Generation (RAG)**
+
+- Combines real-time data retrieval with generative AI capabilities to answer user questions with accuracy and depth.
+- The chatbot can provide evidence-based responses, backed by up-to-date medical research and guidelines.
+
+**14. Chat History Management**
+
+- Users can store, view, and manage their chat history with the virtual assistant.
+- Enables long-term health monitoring and easy retrieval of past medical consultations.
+
+** Technology Stack**
+
+- **Frontend**: HTML5, CSS3, JavaScript (including AJAX for dynamic updates)
+- **Backend**: Flask (Python-based web framework)
+- **AI & Machine Learning**: Deep Learning models integrated for image analysis
+- **Virtual Assistant**: IBM Watson Assistant
+- **Database**: MongoDB Atlas for storing user data (images, analysis results, chat history)
+- **Cloud Storage**: Cloudinary for image hosting and management
+- **Authentication**: Firebase for Google and Microsoft login
+- **Email Notifications**: Gmail SMTP for sending email updates
+- **API Integration**: Retrieval-Augmented Generation (RAG) for enhanced question-answering
 
 VITA (Virtual Interactive Treatment Advisor) - Future Work
 
@@ -217,7 +273,42 @@ See below for our roadmap.
 
 ### How to run the project
 
+**1. Clone the repository**:
+```bash
+   git clone https://github.com/your-repo/vita.git
+   cd vita
+```
+**2. Set up a virtual environment (optional but recommended)**:
+```bash
+   python -m venv venv
+   source venv/bin/activate  # For Windows: venv\Scripts\activate
+```
+**3. Install dependencies**:
+```bash
+   pip install -r requirements.txt
+```
+**4. Configure environment variables:**:
+You need to configure environment variables for the application to function correctly. You can create a .env file in the root directory or set these variables in your environment.
 
+Replace the following placeholders with your own credentials:
+```bash
+SECRET_KEY: A secret key used by Flask for session management and CSRF protection.
+URI: Your MongoDB Atlas connection string.
+MAIL_SERVER: SMTP server for sending emails (Gmail's is smtp.gmail.com).
+MAIL_USE_TLS: Set to True to enable TLS encryption for email.
+MAIL_USERNAME: Your email address for sending notifications.
+MAIL_PASSWORD: The password or app-specific password for the email account.
+MAIL_DEFAULT_SENDER: The email address that will be used as the sender.
+APP_URL: The URL where your app will be hosted (e.g., http://localhost:5000 for local development).
+CRED: Path to the Firebase Admin SDK credentials JSON file.
+CLOUD_NAME, API_KEY, API_SECRET: Your Cloudinary credentials for image uploads.
+MODAL_API: The external API URL for image analysis (if applicable).
+  
+```
+**5. Run the application:**
+```bash
+python app.py
+```
 
 ### Live demo
 
@@ -233,7 +324,7 @@ You can find a running app at [Web Application URL](http://vita-latest.onrender.
 - **Shashank Mishra**  
   Product Developer
 
-- **Ronald Levis Kibet**
+- **Ronald Levis Kibet**  
   Product Designer
 
 - **Team VITA**  
