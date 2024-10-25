@@ -105,7 +105,7 @@ Diagram and step-by-step description of the flow of our solution:
 
 **6. Data Storage & Accessibility:** The entire conversation, including the uploaded image and classification details, is saved in the database. Users can view this information at any time.
 
-## Presentation materials
+ 
 
 ### Solution demo video
 
@@ -185,7 +185,7 @@ The project currently does the following things.
 - Users can store, view, and manage their chat history with the virtual assistant.
 - Enables long-term health monitoring and easy retrieval of past medical consultations.
 
-** Technology Stack**
+**Technology Stack**
 
 - **Frontend**: HTML5, CSS3, JavaScript (including AJAX for dynamic updates)
 - **Backend**: Flask (Python-based web framework)
@@ -270,6 +270,7 @@ See below for our roadmap.
 ![Roadmap](https://drive.usercontent.google.com/download?id=1zOQlHRVIhx_PThABxVQe1WllVVTsAZGo&export=view&authuser=0)
 
 
+# Additional details
 
 ### How to run the project
 
