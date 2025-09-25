@@ -17,7 +17,7 @@
         welcomeMessageElement.textContent = 'Welcome, ' + formattedUsername;
     });
     function startNewChat() {
-        window.location.href = '/newchat';// Replace '/new_chat' with the URL for your new chat page
+        window.location.href = "{{ url_for('page.newchat') }}";
     }
 </script>
 <script>

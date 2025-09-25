@@ -146,10 +146,10 @@
 <div class="logout-wrapper">
     <h3>You have been logged out</h3>
     <p >Thank you for using our service.</p>
-    <a href="{{ url_for('login') }}" class="btn btn-outline-success">
+    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success">
         <i class="bi bi-box-arrow-in-right"></i> Login Again
     </a>
-    <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+    <a href="{{ url_for('page.index') }}" class="btn btn-outline-primary">
         <i class="bi bi-house-door"></i> Landing Page
     </a>
 </div>

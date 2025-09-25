@@ -29,7 +29,7 @@
         event.preventDefault();
         let formData = new FormData(document.getElementById('uploadForm'));
         
-        fetch("/upload_image", {
+        fetch("{{ url_for('upload.upload_image') }}", {
             method: "POST",
             body: formData
         })

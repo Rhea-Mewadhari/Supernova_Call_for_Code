@@ -20,18 +20,20 @@
             margin-right: 5px;
         }
         /* Modal Body Styling */
-        .modal-body {
+        .custom-modal-body {
             height: 60vh;
             overflow-y: auto;
-            padding: 20px;
+            padding: 30px;
+            line-height: 1.7;
             background-color: #ffffff;
-            text-align: center; /* Centers the content horizontally */
+            text-align: center;
+            box-sizing: border-box; /* ✅ Ensures padding doesn't cause horizontal overflow */
         }
 
         /* Heading Styling */
-        .modal-body h1,
-        .modal-body h2,
-        .modal-body h3 {
+        .custom-modal-body h1,
+        .custom-modal-body h2,
+        .custom-modal-body h3 {
             color: #4CAF50; /* Green color for headings */
             margin-top: 20px;
             margin-bottom: 10px;
@@ -39,14 +41,14 @@
         }
 
         /* Paragraph and List Styling */
-        .modal-body p,
-        .modal-body ul {
+        .custom-modal-body p,
+        .custom-modal-body ul {
             text-align: left; /* Left-align paragraphs and lists for readability */
             line-height: 1.6;
             color: #555555;
         }
 
-        .modal-body ul {
+        .custom-modal-body ul {
             list-style-type: disc;
             margin-left: 40px;
         }
@@ -61,7 +63,7 @@
         }
 
         /* Modal Footer Styling */
-        .modal-footer {
+        .custom-modal-footer {
             text-align: center; /* Centers the footer content */
             padding: 10px;
             background-color: #f1f1f1;
@@ -69,25 +71,27 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .modal-body {
-                padding: 10px;
+            .custom-modal-content {
+                width: 90vw;
+                padding: 15px;
             }
 
-            .modal-body ul {
-                margin-left: 20px;
+            .custom-modal-body {
+                padding: 20px;
+                font-size: 0.95rem;
             }
         }
 
         /* Link Styling */
-        .modal-body a {
+        .custom-modal-body a {
             color: #4CAF50; /* Match link color with headings */
             text-decoration: none;
         }
 
-        .modal-body a:hover {
+        .custom-modal-body a:hover {
             text-decoration: underline;
         }
-        .modal {
+        .custom-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1000; /* Sit on top */
@@ -98,14 +102,24 @@
     background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
 }
 
-.modal-content {
-    background-color: #fff; /* White background */
-    margin: 15% auto; /* Center the modal */
-    padding: 20px; /* Padding inside modal */
-    border: 1px solid #888; /* Border around modal */
-    width: 300px; /* Modal width */
-    text-align: center; /* Center text */
+.custom-modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    border: 1px solid #888;
+    width: 55vw;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* ✅ Prevents overflow due to padding */
 }
+
+.custom-modal-dialog {
+    margin: 1.75rem auto;
+    max-width: 800px;
+}
+
 
 /* Close button styles */
 .close {
@@ -202,6 +216,7 @@
         z-index:1000;/* Responsive font size for icon */
     }
 }
+
     
     </style>
 </head>
@@ -211,7 +226,7 @@
         <div class="image-holder">
             <img src="{{ url_for('static', filename='img/registration.png') }}" alt="">
         </div>
-        <form method="post" action="{{ url_for('register') }}">
+        <form method="post" action="{{ url_for('auth.register') }}">
             <h3>Registration Form</h3>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -248,28 +263,28 @@
             <div class="form-group">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">
-                    I accept the <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>
+                    I accept the <a href="#" class="terms-link">Terms and Conditions</a>
                 </label>
             </div>
             <button type="submit" class="btn btn-outline-success btn-block" id="registerBtn" disabled>Register
                 <i class="bi bi-arrow-right"></i>
             </button>
             <div class="already-account text-center mt-3">
-                <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+                <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login</a></p>
             </div>
         </form>
     </div>
 </div>
-<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+<div id="termsModal" class="custom-modal" style="display: none;">
+    <div class="custom-modal-dialog modal-lg" role="document">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header">
                 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="height: 80vh; overflow-y: auto;">
+            <div class="custom-modal-body" style="height: 80vh; overflow-y: auto;">
                 <h1>VITA Terms and Conditions</h1>
                 <div class="section">
                     <h2>Introduction</h2>
@@ -386,7 +401,7 @@
         
                 <div class="section">
                     <h2>Contact Us</h2>
-                    <p>If you have any questions or concerns about these Terms and Conditions, or the handling of your data and images, please contact us using the Contact Us form at the <a href="{{ url_for('index') }}">landing page</a>.</p>
+                    <p>If you have any questions or concerns about these Terms and Conditions, or the handling of your data and images, please contact us using the Contact Us form at the <a href="{{ url_for('page.index') }}">landing page</a>.</p>
                 </div>
             </div>
         
@@ -398,7 +413,7 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
@@ -471,6 +486,41 @@
       location.reload();
       window.location.href = window.location.pathname + '?lang=en'; // This refreshes the page to show the original content
   };
+</script>
+<script>
+$(document).ready(function() {
+    // Remove Bootstrap modal triggers
+    $('.terms-link').removeAttr('data-toggle data-target');
+
+    // Open custom modal
+    $('.terms-link').on('click', function(e) {
+        e.preventDefault();
+        $('.custom-modal').show();
+        $('body').addClass('modal-open');
+    });
+
+    // Close modal buttons
+    $('.custom-modal .close, .custom-modal .btn-secondary, .custom-modal .btn-primary').on('click', function() {
+        $('.custom-modal').hide();
+        $('body').removeClass('modal-open');
+    });
+
+    // Close on outside click
+    $(window).on('click', function(e) {
+        if ($(e.target).hasClass('custom-modal')) {
+            $('.custom-modal').hide();
+            $('body').removeClass('modal-open');
+        }
+    });
+
+    // Close on Escape key
+    $(document).on('keydown', function(e) {
+        if (e.key === "Escape") {
+            $('.custom-modal').hide();
+            $('body').removeClass('modal-open');
+        }
+    });
+});
 </script>
 </body>
 </html>

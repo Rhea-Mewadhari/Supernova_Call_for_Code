@@ -217,7 +217,7 @@
         <div class="image-holder">
             <img src="{{ url_for('static', filename='img/registration.png') }}" alt="Registration Image">
         </div>
-        <form method="post" action="{{ url_for('login') }}">
+        <form method="post" action="{{ url_for('auth.login') }}">
             <h3>Login Form</h3>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -240,9 +240,9 @@
             <button type="submit" class="btn btn-outline-success btn-block">Login
                 <i class="bi bi-arrow-right"></i>
             </button>
-            <p class="already-account text-left mt-3" style="font-size:13px"><a href="{{ url_for('reset_password_request')}}">Forgot Password</a></p>
+            <p class="already-account text-left mt-3" style="font-size:13px"><a href="{{ url_for('auth.reset_request') }}">Forgot Password</a></p>
             <div class="already-account text-center mt-3">
-                <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+                <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a></p>
                 <p>OR</p>
                 <p>Sign up with</p>
                 <div class="social-buttons">

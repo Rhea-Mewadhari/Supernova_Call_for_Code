@@ -79,16 +79,186 @@
 
 /* Adjust layout on larger screens */
 
-   
+/*Custom Chat bot style*/
+  
+  .chat-container {
+    width: 350px;
+    height: 450px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .chat-header {
+    background: #333333;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+  }
+  
+  .chat-box {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .message {
+    margin: 10px 0;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    clear: both;
+  }
+  
+  .user-message {
+    background: #90CF8E;
+    align-self: flex-end;
+    margin-left: auto;
+    color: white;
+  }
+  
+  .bot-message {
+    background: #E5E5EA;
+    align-self: flex-start;
+    margin-right: auto;
+  }
+  
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    background: linear-gradient(135deg, #ffffff, #ffffff); /* Modern gradient */
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    margin-right: 10px;
+  }
+  
+  .chat-input button {
+    background: #ffffff;
+    color: #2a2a72;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .chat-input button:hover {
+    background: gainsboro;
+  }
+  
+  .chat-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .chat-options button {
+    padding: 10px 20px;
+    border: none;
+    background: #90CF8E;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .chat-options button:hover {
+    background: #A7DCA5;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #ratingOptions {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  #ratingDropdown {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-width: 150px;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .message.typing-indicator {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  align-self: flex-start;
+  background-color: #E5E5EA !important;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  max-width: 80%;
+  min-height: 30px; /* 🆕 force a visible height */
+  opacity: 1 !important; /* 🆕 make it visible immediately */
+  transform: translateY(0) !important;
+}
+
+.typing-dot {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50%;
+  background-color: black !important;
+  display: inline-block;
+  animation: blink 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
 
 </style>
+
+
 
 <div class="container" data-aos="fade-in">
     <div class="row">
         
         
         <!-- Image Upload Section (col-8) -->
-        <div class="col-lg-8 col-md-12 mb-4" style="background-color:#ffffff">
+        <div class="col-lg-6 col-md-12 mb-4" style="background-color:#ffffff">
             
             <div class="row align-items-center w-100 mb-4" style="z-index:9999">
                 <div class="col-8 text-start">
@@ -96,7 +266,7 @@
                 </div>
                 <div class="col-4 text-start">
                     <!-- Close Button using Bootstrap -->
-                    <a href="{{ url_for('home') }}" class="btn btn-outline-danger" aria-label="Close">
+                    <a href="{{ url_for('page.home') }}" class="btn btn-outline-danger" aria-label="Close">
                         <span aria-hidden="true"><i class="bi bi-x"></i></span>
                     </a>
                 </div>
@@ -125,6 +295,30 @@
         <div  class="col-lg-4 col-md-12 mb-4" >
             
             <div id="#WebChatContainer"></div>
+
+            <!--My Custom chat bot-->
+
+            <div class="chat-container">
+                <div class="chat-header">VITA</div>
+                <div class="chat-box" id="chatBox">
+                  <!-- Messages will appear here -->
+                </div>
+              
+                 <!-- Custom Inputs -->
+              
+                <div class="chat-options" id="dynamicOptions" style="display: none;"></div>
+              
+                
+                 <!-- Normal Input -->
+                <div class="chat-input">
+                  <input type="text" id="userInput" placeholder="Type a message..." />
+                  <button onclick="sendMessage()">Send</button>
+                </div>
+                
+              </div>
+
+
+
         </div>
         
 
@@ -133,14 +327,13 @@
     </div>
 </div>
 
-
-
 <!-- Bootstrap JS (for interactive elements like dropdowns, modals, etc.) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
-    const customElement = document.querySelector('#WebChatContainer');
-  
+  const customElement = document.querySelector('#WebChatContainer');
+
+  const customMessages = [];
 
    function generateSessionId() {
         const now = new Date();
@@ -217,6 +410,27 @@ function saveHistory(event) {
     messages.push(...event.messages);
 }
 
+function saveCustomChatHistory() {
+  const sessionId = localStorage.getItem('sessionId'); // Or generateSessionId()
+  const email = getUserEmail(); // Replace with your method
+  const timestamp = new Date().toISOString();
+
+  fetch('/save-chat-history', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email,
+      session_id: sessionId,
+      messages: customMessages,
+      timestamp
+    })
+  })
+  .then(res => res.json())
+  .then(data => console.log('✅ Chat saved:', data.message))
+  .catch(err => console.error('❌ Save failed:', err));
+}
+
+
 // Function to generate downloadable chat history
 function createDownload() {
     const downloadLines = [createDownloadText('From', 'Message')];
@@ -264,35 +478,90 @@ async function saveChatHistoryToServer() {
         console.error('Failed to save chat history.');
     }
 }
-    async function sendLabelToChatbot(event) {
-        event.preventDefault();
-        
-        const sendButton = document.getElementById('sendLabelButton');
-        sendButton.innerText = 'Sending...';
-        sendButton.classList.add('btn-sending');
-        
-        try {
-            const resultDiv = document.getElementById('result');
-            const label = resultDiv.querySelector('li')?.textContent?.split(' - ')[0];
 
-            if (label && window.chatInstance) {
-                await window.chatInstance.send({
-                    input: {
-                        message_type: 'text',
-                        text: label
-                    }
-                });
-                console.log('Message sent:', label);
-            } else {
-                console.error('Chat instance is not available or label not found.');
+//Sends label to chatbot
+
+async function sendLabelToChatbot(event) {
+    event.preventDefault();
+
+    const sendButton = document.getElementById('sendLabelButton');
+    sendButton.innerText = 'Sending...';
+    sendButton.classList.add('btn-sending');
+
+    try {
+        const resultDiv = document.getElementById('result');
+        const label = resultDiv.querySelector('li')?.textContent?.split(' - ')[0];
+
+        if (label) {
+            const sessionId = getSessionId();
+
+            // 1. Show label as user's message
+            const userInput = document.getElementById('userInput');
+            userInput.value = label;
+
+            // 2. Trigger the flow like a real message
+            sendMessage();
+
+            // 3. Send to backend (optional: useful for logging)
+            const response = await fetch('/custom-chatbot/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    session_id: sessionId,
+                    label: label
+                })
+            });
+
+            const data = await response.json();
+            if (response.ok && data.response) {
+                console.log('Logged label to server:', data.response);
             }
-        } catch (error) {
-            console.error('Error sending message:', error);
-        } finally {
-            sendButton.innerText = 'Send Label to Chatbot';
-            sendButton.classList.remove('btn-sending');
+
+        } else {
+            console.error('Label not found.');
         }
+    } catch (error) {
+        console.error('Error sending label to chatbot:', error);
+    } finally {
+        sendButton.innerText = 'Send Label to Chatbot';
+        sendButton.classList.remove('btn-sending');
     }
+}
+
+
+
+
+    // async function sendLabelToChatbot(event) {
+    //     event.preventDefault();
+        
+    //     const sendButton = document.getElementById('sendLabelButton');
+    //     sendButton.innerText = 'Sending...';
+    //     sendButton.classList.add('btn-sending');
+        
+    //     try {
+    //         const resultDiv = document.getElementById('result');
+    //         const label = resultDiv.querySelector('li')?.textContent?.split(' - ')[0];
+
+    //         if (label && window.chatInstance) {
+    //             await window.chatInstance.send({
+    //                 input: {
+    //                     message_type: 'text',
+    //                     text: label
+    //                 }
+    //             });
+    //             console.log('Message sent:', label);
+    //         } else {
+    //             console.error('Chat instance is not available or label not found.');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error sending message:', error);
+    //     } finally {
+    //         sendButton.innerText = 'Send Label to Chatbot';
+    //         sendButton.classList.remove('btn-sending');
+    //     }
+    // }
 
     setTimeout(function() {
         const t = document.createElement('script');
@@ -351,7 +620,14 @@ async function saveChatHistoryToServer() {
                 resultDiv.innerHTML = resultHTML;
 
                 // Send the top label to the chatbot
-                sendLabelToChatbot(event);
+                const topPrediction = confidences[0];
+                const confidencePercent = topPrediction.confidence * 100;
+
+                if (confidencePercent < 60) {
+                  appendMessage("I apologize, I have trouble identifying this image. You can upload a more clear image. If I continue to fail, it is advised to seek out your nearest health care practitioner.", 'bot-message');
+                } else {
+                  sendLabelToChatbot(event);
+                }
             }
         })
         .catch(error => {
@@ -406,56 +682,40 @@ async function saveChatHistoryToServer() {
     document.getElementById('image-gallery').innerHTML = '';
     document.getElementById('result').innerHTML = '';
     document.getElementById('error-message').innerText = '';
+    document.getElementById('chatBox').innerHTML = '';
+
 
     const email = getUserEmail();  // Replace with actual logic to get the logged-in user's email
     const sessionId1 = getSessionId();  // Generate a unique session ID
     const chatData = createMinimalChatData(); // Retrieve the messages or chat history
 
-    if (!email || !messages) {
-        console.error("Email or messages not available.");
-        return;
-    }
+    if (!email || customMessages.length === 0) {
+      console.error("Email or messages not available.");
+      return;
+  }
 
-    // Save chat history before clearing
-    fetch('/save-chat-history', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: email,       // User's email
-            session_id: sessionId1,  // Unique session ID
-            messages: chatData,     // Chat history
-            timestamp: new Date().toISOString()  // Timestamp in ISO format
-        })
+  fetch('/save-chat-history', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email,
+      session_id: sessionId1,
+      messages: customMessages,
+      timestamp: new Date().toISOString()
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            console.log(data.message);
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.message) {
+          console.log(data.message);
+      }
+  })
+  .catch(error => {
+      console.error('Error saving custom chat history:', error);
+  });
 
-            // Restart the chatbot conversation after saving chat history
-            if (window.chatInstance) {
-                window.chatInstance.restartConversation().then(() => {
-                    console.log('Chatbot conversation restarted.');
-
-                    // Trigger the restart button click to show the restart button
-                    const restartButton = document.querySelector('[data-action="restart"]');
-                    if (restartButton) {
-                        restartButton.click();
-                        console.log('Restart button clicked to show restart options.');
-                    } else {
-                        console.error('Restart button not found.');
-                    }
-                }).catch(error => {
-                    console.error('Error restarting chatbot conversation:', error);
-                });
-            } else {
-                console.error('Chat instance is not available for restart.');
-            }
-        }
-    })
-    .catch(error => console.error('Error saving chat history:', error));
     const newSessionId = generateSessionId(); // Function to generate a new session ID
     localStorage.setItem('sessionId', newSessionId);
     messages.length = 0;
@@ -519,6 +779,1916 @@ function createMinimalChatData() {
     document.getElementById('drop-zone').addEventListener('click', function() {
         document.getElementById('upload').click();
     });
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    //custom chatbot script
+
+
+    function sendMessage() {
+
+  if (inLLMQuestionMode) return;
+
+  const userInput = document.getElementById('userInput');
+  const message = userInput.value.trim();
+
+  if (message === '') return;
+
+  appendMessage(message, 'user-message');
+  userInput.value = '';
+
+  const msg = message.toLowerCase();
+
+  if (/\bcutaneous larva migran\b/.test(msg)) {
+    runLarvaFlow();
+    return;
+  } else if (/\bbruises\b/.test(msg)) {
+    runBruiseFlow();
+    return;
+  } else if (/\bburn\b/.test(msg)) {
+    runBurnFlow();
+    return;
+  } else if (/\bcut\b/.test(msg) || /\blaceration\b/.test(msg)) {
+    runCutFlow();
+    return;
+  } else if (/\bdiabetic wound\b/.test(msg)) {
+    runDiabeticFlow();
+    return;
+  } else if (/\bshingles\b/.test(msg)) {
+    runShinglesFlow();
+    return;
+  } else if (/\babrasions?\b/.test(msg)) {
+    runAbrasionsFlow();
+    return;
+  } else if (/\btooth discoloration\b/.test(msg)) {
+    runToothFlow();
+    return;
+  } else if (/\bmouth ulcer\b/.test(msg)) {
+    runMouthFlow();
+    return;
+  } else if (/\bgingivitis\b/.test(msg)) {
+    runGingivitisFlow();
+    return;
+  } else if (/\bring worm\b/.test(msg)) {
+    runRingFlow();
+    return;
+  } else if (/\bnail fungus\b/.test(msg)) {
+    runNailFlow();
+    return;
+  } else if (/\bathlete'?s foot\b/.test(msg)) {
+    runAthleteFlow();
+    return;
+  } else if (/\bvenous wounds?\b/.test(msg)) {
+    runVenousFlow();
+    return;
+  } else if (/\bsurgical wounds?\b/.test(msg)) {
+    runSurgicalFlow();
+    return;
+  } else if (/\bimpetigo\b/.test(msg)) {
+    runImpetigoFlow();
+    return;
+  } else if (/\bcellulitis\b/.test(msg)) {
+    runCellulitisFlow();
+    return;
+  } else if (/\bchickenpox\b/.test(msg)) {
+    runChickenFlow();
+    return;
+  }
+
+  // Fallback if no match found
+  appendMessage("Sorry, I couldn't identify the condition. Please try describing it more clearly.", 'bot-message');
+
+  //For History
+  // appendMessage(message, 'user-message');
+  // customMessages.push({ from: 'You', message }); // ✅ push user input to history
+
+}
+
+  
+function appendMessage(text, className) {
+  const chatBox = document.getElementById('chatBox');
+
+  const createAndShowMessage = () => {
+    const msg = document.createElement('div');
+    msg.className = 'message ' + className;
+    msg.innerHTML = text.replace(/\n/g, '<br>');
+    chatBox.appendChild(msg);
+
+    // 🔄 Save to history (bot or user)
+    if (className.includes('user-message')) {
+      customMessages.push({ from: 'You', message: text });
+    } else if (className.includes('bot-message')) {
+      customMessages.push({ from: 'Assistant', message: text });
+    }
+
+    // Animate
+    setTimeout(() => {
+      msg.classList.add('show');
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 10);
+  };
+
+  if (className.includes('bot-message')) {
+    setTimeout(() => createAndShowMessage(), 600);
+  } else {
+    createAndShowMessage();
+  }
+}
+
+
+  let activeFlowName = '';
+  let inLLMQuestionMode = false;
+
+
+// Question Flows:
+  function runBruiseFlow() {
+    activeFlowName = 'bruise';
+    flowState = initFlowState();
+    runFlowStep(bruiseFlow, "start");
+  }
+
+  function runBurnFlow(){
+    activeFlowName = 'burn';
+    flowState = initFlowState();
+    runFlowStep(burnFlow, "start");
+  }
+
+  function runCutFlow(){
+    activeFlowName = 'cut';
+    flowState = initFlowState();
+    runFlowStep(cutFlow, "start");
+  }
+
+  function runDiabeticFlow(){
+    activeFlowName = 'diabetic';
+    flowState = initFlowState();
+    runFlowStep(diabeticFlow, "start");
+  }
+
+  function runShinglesFlow(){
+    activeFlowName = 'shingles';
+    flowState = initFlowState();
+    runFlowStep(shinglesFlow, "start");
+  }
+
+  function runAbrasionsFlow(){
+    activeFlowName = 'abrasion';
+    flowState = initFlowState();
+    runFlowStep(abrasionFlow, "start");
+  }
+
+  function runToothFlow(){
+    activeFlowName = 'tooth';
+    flowState = initFlowState();
+    runFlowStep(toothFlow, "start");
+  }
+
+  function runMouthFlow(){
+    activeFlowName = 'mouth';
+    flowState = initFlowState();
+    runFlowStep(mouthFlow, "start");
+  }
+
+  function runGingivitisFlow(){
+    activeFlowName = 'gingivitis';
+    flowState = initFlowState();
+    runFlowStep(gingivitisFlow, "start");
+  }
+
+  function runLarvaFlow(){
+    activeFlowName = 'larva';
+    flowState = initFlowState();
+    runFlowStep(larvaFlow, "start");
+  }
+
+  function runRingFlow(){
+    activeFlowName = 'ringworm';
+    flowState = initFlowState();
+    runFlowStep(ringFlow, "start");
+  }
+
+  function runNailFlow(){
+    activeFlowName = 'nail';
+    flowState = initFlowState();
+    runFlowStep(nailFlow, "start");
+  }
+  
+  function runAthleteFlow(){
+    activeFlowName = 'athlete';
+    flowState = initFlowState();
+    runFlowStep(athleteFlow, "start");
+  }
+
+  function runVenousFlow(){
+    activeFlowName = 'venous';
+    flowState = initFlowState();
+    runFlowStep(venousFlow, "start");
+  }
+
+  function runSurgicalFlow(){
+    activeFlowName = 'surgical';
+    flowState = initFlowState();
+    runFlowStep(surgicalFlow, "start");
+  }
+
+  function runImpetigoFlow(){
+    activeFlowName = 'impetigo';
+    flowState = initFlowState();
+    runFlowStep(impetigoFlow, "start");
+  }
+
+  function runCellulitisFlow(){
+    activeFlowName = 'cellulitis';
+    flowState = initFlowState();
+    runFlowStep(cellulitisFlow, "start");
+  }
+
+  function runChickenFlow(){
+    activeFlowName = 'chickenpox';
+    flowState = initFlowState();
+    runFlowStep(chickenFlow, "start");
+  }
+
+  function initFlowState() {
+    return {
+      mild: 0,
+      moderate: 0,
+      severe: 0
+    };
+  }
+
+  let flowState = {
+    mild : 0,
+    moderate : 0,
+    severe : 0
+  }
+  
+  const bruiseFlow = {
+
+    start: {
+      message: "What is the colour of the skin?",
+      options: ["Red", "Purple", "Black"],
+      next: "pain",
+      onAnswer: (answer, flowState) => {
+        if (answer == "Red"){
+          flowState.mild+=1;
+        } else if (answer == "Purple"){
+          flowState.moderate +=1;
+        }else if (answer == "Black"){
+          flowState.severe+=1;
+        }
+      }
+    },
+    pain : {
+      message: "Rate your level of pain on a scale on 1 to 5.",
+      options: ["1","2", "3", "4","5"],
+      next: "area",
+      onAnswer: (answer, flowState) => {
+        if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+          flowState.mild+=1;
+        } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+          flowState.moderate +=1;
+        }else if (parseInt(answer) == 5){
+          flowState.severe+=1;
+        }
+    }
+  },
+  area : {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "swelling",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  swelling: {
+    message: "Is there swelling?",
+    options: ["Yes", "No"],
+    next: "stiffness",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  stiffness: {
+    message: "Is there stiffness or a limited range of motion?",
+    options: ["Yes", "No"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  }
+}
+  
+const burnFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: "oozing",
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+  oozing : {
+    message : "Is the affected area oozing liquid?",
+    options: ["Yes", "No"],
+    next: "sensation",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  sensation: {
+    message: "Is there a loss of sensation?",
+    options: ["Yes", "No"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+}
+
+const cutFlow = {
+
+  start: {
+    message : "How heavy is the bleeding?",
+    options: ["It is oozing slowly","It is soaking up a face cloth"],
+    next: "slow",
+    onAnswer: (answer, flowState) => {
+      if (answer == "It is oozing slowly"){
+        flowState.mild+=1;
+      } else if (answer == "It is soaking up a face cloth"){
+        flowState.moderate +=1;
+        flowState.severe+=1;
+      }
+    }
+  },
+  slow : {
+    message : "Does the bleeding slow when preassure is applied?",
+    options: ["Yes", "No"],
+    next: {
+      Yes: "pain",
+      No: "sensation"
+      },
+      
+    onAnswer:  (answer, flowState) => {
+      if (answer == "Yes"){
+        flowState.mild+=1;       
+        flowState.moderate +=1;
+      } else if (answer == "No"){
+        flowState.severe +=2;
+      }
+    }
+  },
+  sensation: {
+    message: "Is there a loss of function?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=5;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+}
+
+const diabeticFlow = {
+
+  start: {
+    message : "What is the duration of the wound?",
+    options: ["1 - 2 days since the onset", "3 - 5 days since the onset", "5+ days since the onset"],
+    next: {
+      "1 - 2 days since the onset": "pain",
+      "3 - 5 days since the onset": "pain",
+      "5+ days since the onset": "oozing"
+      },
+      
+    onAnswer:  (answer, flowState) => {
+      if (answer == "1 - 2 days since the onset"){
+        flowState.mild+=1;       
+      } else if (answer == "3 - 5 days since the onset"){
+        flowState.moderate +=1;
+      }else if (answer == "5+ days since the onset"){
+        flowState.severe += 2;
+      }
+    }
+  },
+  oozing: {
+    message: "Is the wound oozing fluid?",
+    options: ["Yes", "No"],
+    next: "smell",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=2;
+      }
+    }
+  },
+  smell: {
+    message: "Is there a foul smell coming from the wound?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=2;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+}
+
+
+const shinglesFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: "fever",
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+  fever: {
+    message: "Do you have a fever?",
+    options: ["Yes", "No"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+}
+
+const abrasionFlow = {
+
+  start: {
+    message: "What is the colour of the skin?",
+    options: ["Red", "White"],
+    next: "area",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Red"){
+        flowState.mild+=1;
+      } else if (answer == "White"){
+        flowState.moderate +=1;
+      }
+    }
+  },
+  area : {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: "swelling",
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+  }
+},
+swelling: {
+  message: "Is there swelling?",
+  options: ["Yes", "No"],
+  next: "oozing",
+  onAnswer: (answer, flowState) => {
+    if (answer == "No"){
+      flowState.mild+=1;
+    } else if (answer == "Yes"){
+      flowState.moderate +=1;
+      flowState.severe +=1;
+    }
+  }
+},
+oozing: {
+  message: "Is the wound oozing fluid?",
+  options: ["Yes", "No"],
+  next: null,
+  onAnswer: (answer, flowState) => {
+    if (answer == "No"){
+      flowState.mild+=1;
+    } else if (answer == "Yes"){
+      flowState.moderate +=1;
+      flowState.severe +=1;
+    }
+  }
+}
+}
+
+const toothFlow = {
+
+  start: {
+    message : "What is the colour of the tooth?",
+    options: ["Brown", "Yellow", "Purple", "Black"],
+    next: "sensitive",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Brown" || answer == "Yellow" || answer == "Purple"){
+        flowState.mild+=1;
+        flowState.moderate +=1;
+      } else if (answer == "Black"){
+        flowState.severe +=2;
+      }
+    }
+  },
+  sensitive: {
+    message : "Are the teeth feeling sensitive?",
+    options: ["Yes", "No"],
+    next: {
+      "Yes": "texture",
+      "No": "pain"
+      },
+      
+    onAnswer:  (answer, flowState) => {
+      if (answer == "Yes"){
+        flowState.mild+=1;       
+      } else if (answer == "No"){
+        flowState.moderate +=1;
+      }
+    }
+  },
+  texture: {
+    message: "Is there a change in tooth texture?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=2;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+}
+
+const mouthFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["size of a 50c coin", "there are multiple ulcers"],
+    next: {
+      "size of a 50c coin": "swelling",
+      "there are multiple ulcers": "duration"
+      },
+      
+    onAnswer:  (answer, flowState) => {
+      if (answer == "size of a 50c coin"){
+        flowState.mild+=1;       
+        flowState.moderate +=1;
+      } else if (answer == "there are multiple ulcers"){
+        flowState.severe +=1;
+      }
+    }
+  },
+  duration: {
+    message : "What is the duration of the wound?",
+    options: ["1 - 2 days since the onset", "3 - 5 days since the onset", "5+ days since the onset"],
+    next: "swelling",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "1 - 2 days since the onset"){
+        flowState.mild+=1;       
+      } else if (answer == "3 - 5 days since the onset"){
+        flowState.moderate +=1;
+      }else if (answer == "5+ days since the onset"){
+        flowState.severe += 2;
+      }
+    }
+  },
+  swelling: {
+    message: "Is there swelling?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+}
+
+const gingivitisFlow = {
+
+  start: {
+    message : "Is the gum bleeding?",
+    options: ["Yes", "No"],
+    next: {
+      "Yes": "bleeding",
+      "No": "sensitive"
+      },
+      
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;       
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=1;
+      }
+    }
+  },
+  bleeding: {
+    message : "Rate the scale of bleeding?",
+    options: ["Bleeds only when brushing teeth", "Bleeds all the time"],
+    next: "sensitive",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "Bleeds only when brushing teeth"){
+        flowState.mild+=1;
+      }else if (answer == "Bleeds all the time"){
+        flowState.moderate+=1;       
+      }
+    }
+  },
+  sensitive: {
+    message : "Are the teeth feeling sensitive?",
+    options: ["Yes", "No"],
+    next:"pain",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;       
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+}
+
+const larvaFlow = {
+
+  start: {
+    message: "Is the skin itchy?",
+    options: ["Yes", "No"],
+    next: "area",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  area : {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "blister",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  blister : {
+    message: "Is the affected area blistered?",
+    options: ["Yes", "No"],
+    next: "fever",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  fever : {
+    message: "Are you suffering from fever, malaise, or fatigue?",
+    options: ["Yes", "No"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  }
+}
+
+const ringFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "hair",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  hair: {
+    message: "Do you have any hair loss around the affected area?",
+    options: ["Yes", "No"],
+    next: "thickening",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  thickening: {
+    message: "Is there thickening or discolouration of the nail?",
+    options: ["Yes", "No"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+}
+
+
+const nailFlow = {
+
+  start: {
+    message : "Is there discolouration of the nails?",
+    options: ["Yes", "No"],
+    next: "thickening",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;       
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=1;
+      }
+    }
+  },
+  thickening: {
+    message : "Is there thickening of the nails?",
+    options: ["Yes", "No"],
+    next: {
+      "Yes": "lift",
+      "No": "area"
+      },
+      
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;       
+        flowState.moderate +=1;
+      } else if (answer == "Yes"){
+        flowState.severe +=1;
+      }
+    }
+  },
+  lift: {
+    message : "Are the nails lifting from the nail bed?",
+    options: ["Yes", "No"],
+    next:"area",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;       
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+      }
+    }
+  },
+  area : {
+    message : "How large is the affected area?",
+    options: ["Tip of the nail","Half the nail","Whole nail"],
+    next: "odor",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Tip of the nail"){
+        flowState.mild+=1;
+      } else if (answer == "Half the nail"){
+        flowState.moderate +=1;
+      }else if (answer == "Whole nail"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  odor: {
+    message : "Is there an odor coming from the nail?",
+    options: ["Yes", "No"],
+    next:"pain",
+    onAnswer:  (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;       
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+}
+
+const athleteFlow = {
+
+  start: {
+    message: "Is the affected skin area peeling?",
+    options: ["Yes", "No"],
+    next: "area",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  area : {
+    message : "How large is the affected area?",
+    options: ["Between 2 toes","Between 3 toes","Whole foot"],
+    next: "oozing",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Between 2 toes"){
+        flowState.mild+=1;
+      } else if (answer == "Between 3 toes"){
+        flowState.moderate +=1;
+      }else if (answer == "Whole foot"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  oozing: {
+    message: "Is the affected area oozing fluid?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  }
+}
+
+const venousFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "discolouration",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  discolouration: {
+    message: "Is there discolouration?",
+    options: ["Yes", "No"],
+    next: "oozing",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  oozing: {
+    message: "Is the affected area oozing fluid?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+  }
+}
+}
+
+const surgicalFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Size of a Coin","Size of a Fist","Size of a Palm"],
+    next: "appearance",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Size of a Coin"){
+        flowState.mild+=1;
+      } else if (answer == "Size of a Fist"){
+        flowState.moderate +=1;
+      }else if (answer == "Size of a Palm"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  appearance: {
+    message: "Is there a change in appearance?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: "fever",
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+  }
+},
+fever: {
+  message: "Is there a fever?",
+  options: ["Yes", "No"],
+  next: "oozing",
+  onAnswer: (answer, flowState) => {
+    if (answer == "No"){
+      flowState.mild+=1;
+    } else if (answer == "Yes"){
+      flowState.moderate +=1;
+      flowState.severe +=1;
+    }
+  }
+},
+oozing: {
+  message: "Is the affected area oozing fluid?",
+  options: ["Yes", "No"],
+  next: null,
+  onAnswer: (answer, flowState) => {
+    if (answer == "No"){
+      flowState.mild+=1;
+    } else if (answer == "Yes"){
+      flowState.moderate +=1;
+      flowState.severe +=1;
+    }
+  }
+}
+}
+
+const impetigoFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Between the upper lip and nose","Entire upper lip extending towards the nose","Extending towards the face"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Between the upper lip and nose"){
+        flowState.mild+=1;
+      } else if (answer == "Entire upper lip extending towards the nose"){
+        flowState.moderate +=1;
+      }else if (answer == "Extending towards the face"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: "swollen",
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  },
+  swollen: {
+    message: "Are the lymph nodes swollen?",
+    options: ["Yes", "No"],
+    next: "fever",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+fever: {
+  message: "Is there a fever?",
+  options: ["Yes", "No"],
+  next: "oozing",
+  onAnswer: (answer, flowState) => {
+    if (answer == "No"){
+      flowState.mild+=1;
+    } else if (answer == "Yes"){
+      flowState.moderate +=1;
+      flowState.severe +=1;
+    }
+  }
+},
+oozing: {
+  message: "Is the affected area oozing fluid?",
+  options: ["Yes", "No"],
+  next: null,
+  onAnswer: (answer, flowState) => {
+    if (answer == "No"){
+      flowState.mild+=1;
+    } else if (answer == "Yes"){
+      flowState.moderate +=1;
+      flowState.severe +=1;
+    }
+  }
+}
+}
+
+const cellulitisFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Only the foot","The foot extending above the ankle","The foot extending above the shin"],
+    next: "appearance",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Only the foot"){
+        flowState.mild+=1;
+      } else if (answer == "The foot extending above the ankle"){
+        flowState.moderate +=1;
+      }else if (answer == "The foot extending above the shin"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  appearance: {
+    message: "Does the affected area feel hot or tendor?",
+    options: ["Yes", "No"],
+    next: "blisters",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  blisters: {
+    message: "Do you have blisters?",
+    options: ["Yes", "No"],
+    next: "itchy",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  itchy: {
+    message: "Is the skin itcy?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  }
+}
+
+const chickenFlow = {
+
+  start: {
+    message : "How large is the affected area?",
+    options: ["Only one part of the body","Extending toward the whole body","The whole body and face"],
+    next: "fever",
+    onAnswer: (answer, flowState) => {
+      if (answer == "Only one part of the body"){
+        flowState.mild+=1;
+      } else if (answer == "Extending toward the whole body"){
+        flowState.moderate +=1;
+      }else if (answer == "The whole body and face"){
+        flowState.severe+=1;
+      }
+    }
+  },
+  fever: {
+    message: "Is there a fever?",
+    options: ["Yes", "No"],
+    next: "fatigue",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  fever: {
+    message: "Do you feel fatigued?",
+    options: ["Yes", "No"],
+    next: "dehydrated",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  dehydrated: {
+    message: "Do you feel dehydrated?",
+    options: ["Yes", "No"],
+    next: "appetite",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  appetite: {
+    message: "Do you have a loss of appetite?",
+    options: ["Yes", "No"],
+    next: "muscle",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  muscle: {
+    message: "Do you have muscle or joint pain?",
+    options: ["Yes", "No"],
+    next: "pain",
+    onAnswer: (answer, flowState) => {
+      if (answer == "No"){
+        flowState.mild+=1;
+      } else if (answer == "Yes"){
+        flowState.moderate +=1;
+        flowState.severe +=1;
+      }
+    }
+  },
+  pain : {
+    message: "Rate your level of pain on a scale on 1 to 5.",
+    options: ["1","2", "3", "4","5"],
+    next: null,
+    onAnswer: (answer, flowState) => {
+      if (parseInt(answer) >= 1 && parseInt(answer) <= 2){
+        flowState.mild+=1;
+      } else if (parseInt(answer) >= 3 && parseInt(answer) <= 4){
+        flowState.moderate +=1;
+      }else if (parseInt(answer) == 5){
+        flowState.severe+=1;
+      }
+    }
+  }
+}
+
+//flow runner
+
+
+
+function runFlowStep(flow, stepKey) {
+  const step = flow[stepKey];
+  appendMessage(step.message, 'bot-message');
+
+  const container = document.getElementById('dynamicOptions');
+  container.innerHTML = '';
+  container.style.display = 'flex';
+
+  document.getElementById('userInput').disabled = true;
+
+  step.options.forEach(option => {
+    const btn = document.createElement('button');
+    btn.textContent = option;
+
+    btn.onclick = function () {
+      appendMessage(option, 'user-message');
+
+      // Run custom onAnswer logic if available
+      if (typeof step.onAnswer === 'function') {
+        step.onAnswer(option, flowState);
+      }
+
+      container.style.display = 'none';
+      document.getElementById('userInput').disabled = false;
+
+      // Safely determine the next step
+      let nextStepKey = step.next;
+
+      if (nextStepKey && typeof nextStepKey === 'object') {
+        nextStepKey = nextStepKey[option]; // Dynamic branch
+      }
+
+      if (nextStepKey && flow[nextStepKey]) {
+        runFlowStep(flow, nextStepKey);
+      } else {
+        appendMessage("Thanks. Assessment complete.", 'bot-message');
+        console.log("Flow state:", flowState); // Final state debug
+
+        showDiagnosisResult(flowState, activeFlowName);
+
+      }
+    };
+
+    container.appendChild(btn);
+  });
+}
+
+
+  
+
+  /// Testing ////// ////// ////// ////// ////// ////// ////// ////// ////// ////// ////// //////
+  
+  window.onload = function () {
+    // Bot's initial message
+    appendMessage("Hello, I am VITA. Your Virtual Interactive Treatment Advisor. How can I help?", 'bot-message');
+   
+  };
+  
+
+  document.getElementById('userInput').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent newline if it's a textarea (not needed if input)
+      sendMessage();
+    }
+  });
+
+  //////////////////////////////////////////////////////////////////////////
+  //Diagnosis
+
+  const diagnosisDatabase = {
+      bruise: {
+        name: "Bruise - is a discoloration of the skin caused by blood leaking from small blood vessels beneath the surface.", 
+        mild: {
+          recommendation: "Elevate the bruised area above the heart level, if possible. Apply an ice pack wrapped in a towel for 20 minutes to the wound to reduce swelling and pain"
+        },
+        moderate: {
+          recommendation: "Elevate the bruised area above the heart level, if possible. Apply an ice pack wrapped in a towel for 20 minutes to the wound to reduce swelling and pain. Wrap the bruised area in an elastic bandage, if pain is severe. Apply aloe vera to reduce pain and inflammation"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      burn: {
+        name: "Burn - an injury to the skin or other tissues caused by heat, cold, electricity, chemicals, friction, or radiation.",
+        mild: {
+          recommendation: "Rinse burn area under cold running water for 1-2 minutes. Place a clean wet cloth over the burn area to relieve pain and swelling. Apply aloe vera to the burn to reduce inflammation. Apply honey to reduce inflammation. Avoid exposing the burn to direct sunlight. DON’T POP YOUR BLISTERS. Take an over the counter pain reliever(ibuprofen) for pain. Ensure hydration"
+        },
+        moderate: {
+          recommendation: "Rinse burn area under cold running water for 1-2 minutes. Place a clean wet cloth over the burn area to relieve pain and swelling. Apply aloe vera to the burn to reduce inflammation. Avoid exposing the burn to direct sunlight. DON’T POP YOUR BLISTERS. Take an over the counter pain reliever(ibuprofen) for pain"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible.. Cover burns with a clean cloth but do not remove stuck clothing"
+        }
+      },
+      cut: {
+        name: "Laceration - a wound caused by tearing or splitting of soft body tissue, often resulting in an irregular or jagged cut.",
+        mild: {
+          recommendation: "First steps to follow: Wash hands with soap before interacting with the wound. Remove clothing/jewelry from around the wound. Use a clean, dry cloth to apply pressure to the wound to stop the bleeding. Once the bleeding has stopped, clean the wound with clean water. Examine the wound for dirt/foreign objects. If possible, apply antibiotic cream. If not cream available see below for alternatives: Pat the wound dry with a clean cloth. Close the wound and apply adhesive bandage. Apply over-the-counter bacterial ointments to the cuts– alternative. Apply a thin layer of aloe vera gel to the wound area–alternative. Apply honey to the wound to reduce inflammation–alternative. Mix turmeric with some warm water to make a paste and then apply that paste to the wound area–alternative. Apply coconut oil to reduce the risk of infection–alternative"
+        },
+        moderate: {
+          recommendation: "First steps to follow: Wash hands with soap before interacting with the wound. Remove clothing/jewelry from around the wound. Use a clean, dry cloth to apply pressure to the wound to stop the bleeding. Once the bleeding has stopped, clean the wound with clean water. Examine the wound for dirt/foreign objects. If possible, apply antibiotic cream. If not cream available see below for alternatives: Pat the wound dry with a clean cloth. Close the wound and apply adhesive bandage. Apply over-the-counter bacterial ointments to the cuts– alternative. Apply a thin layer of aloe vera gel to the wound area–alternative. Apply coconut oil to reduce the risk of infection–alternative"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible. Continue to apply preassure with a clean cloth."
+        }
+      },
+      diabetic: {
+        name: "Diabetic Wound - a serious complication of diabetes caused by impaired circulation and nerve damage, leading to slow healing and increased risk of infection.",
+        mild: {
+          recommendation: "Follow these steps first: Wash hands. Rinse off the wound with warm water. Apply pressure to stop any bleeding. Apply antibiotic cream see below for alternatives: Apply over-the-counter bacterial ointments to the cuts– alternative. Apply a thin layer of aloe vera gel to the wound area–alternative. Apply honey to the wound to reduce inflammation–alternative. Mix turmeric with some warm water to make a paste and then apply that paste to the wound area–alternative. Apply coconut oil to reduce the risk of infection–alternative. Avoid putting weight, pressure, or stress on the wound"
+        },
+        moderate: {
+          recommendation: "Follow these steps first: Wash hands.Rinse off the wound with warm water. Apply pressure to stop any bleeding. Apply antibiotic cream see below for alternatives: Apply over-the-counter bacterial ointments to the cuts– alternative. Apply a thin layer of aloe vera gel to the wound area–alternative. Apply coconut oil to reduce the risk of infection–alternative. Avoid putting weight, pressure, or stress on the wound"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      shingles: {
+        name: "Shingles - a painful rash caused by the reactivation of the varicella-zoster virus.",
+        mild: {
+          recommendation: "Create a paste by adding a bit of water to baking soda and apply the paste to the affected area to relieve irateness. Create a thick paste using about 4 garlic cloves and apply it to the affected area for a few minutes, and then wash with warm water. Apply honey to the affected area to reduce inflammation and relieve pain. Applying cool water to the affected area relieves pain. Apply coconut oil to the affected area to reduce inflammation"
+        },
+        moderate: {
+          recommendation: "Treat rash topically with povidone iodine cream. Applying cool water to the affected area relieves pain. Apply coconut oil to the affected area to reduce inflammation"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      abrasion: {
+        name: "Abrasion - A common type of scrape, often caused by friction against a rough surface",
+        mild: {
+          recommendation: "Clean the wound with cool-warm water and mild soap. Gently remove any rocks, debris or dirt and try not to scrub the wound. To stop bleeding place a clean towel over the wound and apply direct pressure with your palm. Continue for a minute/2 or until the bleeding stops. You can leave it be as is until healed. If the wound is in a place that is likely to get dirty, you can cover with a bandage"
+        },
+        moderate: {
+          recommendation: "Clean the wound with cool-warm water and mild soap. Gently remove any rocks, debris or dirt and try not to scrub the wound. To stop bleeding place a clean towel over the wound and apply direct pressure with your palm. Continue for a minute/2 or until the bleeding stops. You can cover it until the skin starts to heal. If the wound is in a place that is likely to get dirty, you can cover with a bandage"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      tooth: {
+        name: "Tooth Discolouration - can manifest as yellowing, browning, graying, or other color changes, often noticeable as stains or darker areas.",
+        mild: {
+          recommendation: "Get teeth whitening at a dentist. Purple- cut down on wine consumption. Yellow- cut down on eating/drinking dark-coloured foods/drinks. Brown- cut down on smoking/chewing tobacco. Avoid ingredients with baking soda, activated charcoal, and citric acid"
+        },
+        moderate: {
+          recommendation: "Get teeth whitening at a dentist. Avoid ingredients with baking soda, activated charcoal, and citric acid"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      mouth: {
+        name: "Mouth Ulcer - are small, painful sores that appear on the mucous membrane lining of the mouth.",
+        mild: {
+          recommendation: "Covering the ulcer with a paste made from baking soda to draw out the pus. Rinse with salt water and baking soda to soothe sores. Eat 1 cup of yogurt daily. Apply honey to the sore to reduce inflammation. Apply coconut oil to the sore to reduce inflammation. Pop 1 zinc lozenges a day. Rinse with water that contains a steroid(Prednisolone soluble tablets) to reduce pain and swelling"
+        },
+        moderate: {
+          recommendation: "Placing milk of magnesia on the ulcer to soothe pain. Using over-the-counter topical products that are made with benzocaine such as Orajel/Anbesol. It is recommended to see a dentist within a week or two, if there are no changes in symptoms."
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      gingivitis: {
+        name: "Gingivitis - the earliest stage of gum disease, characterized by inflammation of the gums.",
+        mild: {
+          recommendation: "Improve oral hygiene with longer teeth brushing and regular flossing. Use Desensitizing toothpaste. Use Fluoride gel. Brush, floss, and rinse with antiseptic mouthwash daily"
+        },
+        moderate: {
+          recommendation: "Use Desensitizing toothpaste. Use Fluoride gel. It is recommended to see a dentist within a week or two, if there is no change in symptoms"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      larva: {
+        name: "Cutaneous Larva Migrans - also known as creeping eruption, is a parasitic skin infection caused by hookworm larvae.",
+        mild: {
+          recommendation: "Apply a mixture of tea tree oil, baking soda and water to soothe the irritated area"
+        },
+        moderate: {
+          recommendation: "Apply a mixture of tea tree oil, baking soda and water to soothe the irritated area"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      ringworm: {
+        name: "Ringworm - a common, contagious fungal skin infection, not caused by a worm, and often appears as a ring-shaped, itchy, scaly rash.",
+        mild: {
+          recommendation: "Apply anti-fungal cream to the affected area - kills fungus and reduces itchiness and redness. Alternative to reduce inflammation: Apply yogurt to affected area – alternative. Apply tea tree oil to affected area – alternative. Apply a mixture of tea tree oil, ginger, garlic and aloe vera as a cream/paste – alternative"
+        },
+        moderate: {
+          recommendation: "Apply anti-fungal cream to the affected area to kill fungus and reduce the itchiness and redness"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      nail: {
+        name: "Nail Fungus - also known as onychomycosis, is a common fungal infection of the nails, particularly toenails.",
+        mild: {
+          recommendation: "Apply Vicks VaporRub to the skin around the nail. Apply Ozonated sunflower oil to the skin around the nail. Apply antibacterial cream to the nail"
+        },
+        moderate: {
+          recommendation: "Apply Vicks VaporRub  to the skin around the nail"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      athlete: {
+        name: "Athele's Foot - is a common fungal skin infection that affects the feet, often between the toes.",
+        mild: {
+          recommendation: "Apply a mixture of coconut oil and tea tree oil to the affected area. Apply neem oil to the affected area, massaging it into the skin. Crush 4-5 cloves of garlic. Once smashed, run them over the affected area. Do it twice daily. Keep feet dry and clean. Open shoes/sandals is encouraged"
+        },
+        moderate: {
+          recommendation: "Apply a mixture of coconut oil and tea tree oil to the affected area. Crush 4-5 cloves of garlic. Once smashed, run them over the affected area. Do it twice daily. Rub Vick VaporRub into the affected area, massaging into the skin. Keep feet dry and clean. Open shoes/sandals is encouraged"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      venous: {
+        name: "Venous Wound - A wound on the leg or ankle caused by abnormal or damaged veins.",
+        mild: {
+          recommendation: "Elevate the legs during the day (30 min 4-5 times a day) to reduce swelling and improve blood flow. Elevate legs when sleeping(15-20cm). Exercise(helps to strengthen leg muscles and improve blood flow in legs), examples include: While sitting, flex ankles by pointing toes away from you and then point them up(do 10 reps throughout the day, the more the better). Taking 10 minutes walks throughout the day. Use compression socks to prevent pooling of fluid in the legs"
+        },
+        moderate: {
+          recommendation: "Elevate the legs during the day (30 min 4-5 times a day) to reduce swelling and improve blood flow. Elevate legs when sleeping(15-20cm). Use compression socks to prevent pooling of fluid in the legs"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      surgical: {
+        name: "Surgical Wound - is a cut or incision in the skin and tissues made during a surgical procedure to access and manipulate the body's tissues for treatment.",
+        mild: {
+          recommendation: "Follow these steps: Wash hands with soap and water. Remove the existing dressings. Clean the wound using clean water or a saline solution. Treat the wound with antibiotics (see below for alternatives): Close and dress the wound. Routinely dress the wound to reduce the risk of infection. Apply over-the-counter bacterial ointments to the cuts– alternative. Apply a thin layer of aloe vera gel to the wound area–alternative. Apply honey to the wound to reduce inflammation–alternative"
+        },
+        moderate: {
+          recommendation: "Follow these steps: Wash hands with soap and water. Remove the existing dressings. Clean the wound using clean water or a saline solution. Treat the wound with antibiotics (see below for alternatives): Close and dress the wound. Routinely dress the wound to reduce the risk of infection. Apply over-the-counter bacterial ointments to the cuts– alternative. Apply a thin layer of aloe vera gel to the wound area–alternative"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      impetigo: {
+        name: "Impetigo - a contagious bacterial skin infection, commonly known as 'school sores,' that causes red sores which can break open, ooze fluid, and develop a yellow-brown crust.",
+        mild: {
+          recommendation: "Soak the infected area in warm water for 15-20 min. Scrub gently with a washcloth and antibacterial soap. Ensure to always keep the area clean. Use aqueous cream to remove crusts"
+        },
+        moderate: {
+          recommendation: "Soak the infected area in warm water for 15-20 min. Scrub gently with a washcloth and antibacterial soap. Apply antibiotic ointments. Ensure to always keep the area clean"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      cellulitis: {
+        name: "Cellulitis - a bacterial infection of the deeper layers of the skin and underlying tissues.",
+        mild: {
+          recommendation: "Wash twice a day, avoid hydrogen peroxide/alcohol. Keep the covered during the day. Keep the area clean. Elevate the affected area. Apply a cool compress to alleviate pain or heat"
+        },
+        moderate: {
+          recommendation: "Wash twice a day, avoid hydrogen peroxide/alcohol. You may cover the area with a thin layer of petroleum jelly (Vaseline), and a non-stick bandage. Keep the covered during the day. Keep the area clean. Elevate the affected area. Apply a cool compress to alleviate pain or heat"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      },
+      chickenpox: {
+        name: "Chickenpox - a highly contagious viral illness causing an itchy, blister-like rash.",
+        mild: {
+          recommendation: " Stay at home as it is highly contagious. Use a clean finger/cotton swab to apply calamine lotion on itchy skin areas to soothe the skin. Wear mittens to prevent scratching"
+        },
+        moderate: {
+          recommendation: " Stay at home as it is highly contagious. Use a clean finger/cotton swab to apply calamine lotion on itchy skin areas to soothe the skin. Suck on sugar free popsicles(ice lollies) to soothe mouth sores, as well as get more fluids and avoid dehydration. Bath in ground oatmeal(1 spoon in the bath) to relieve itchiness. Soak for no more than 20 min. Wear mittens to prevent scratching. Use a chamomile compress to relieve itchiness"
+        },
+        severe: {
+          recommendation: "Seek medical attention from your nearest healthcare practitioner as soon as possible"
+        }
+      }
+    };
+
+    function showDiagnosisResult(flowState, conditionName) {
+      const { mild, moderate, severe } = flowState;
+    
+      let severity = '';
+    
+      if (severe >= moderate && severe >= mild) {
+        severity = 'severe';
+      } else if (moderate >= mild) {
+        severity = 'moderate';
+      } else {
+        severity = 'mild';
+      }
+    
+      const condition = diagnosisDatabase[conditionName];
+    
+      if (condition && condition[severity]) {
+        const { recommendation } = condition[severity];
+    
+        // Format recommendation line by line
+        const sentences = recommendation.split('. ').map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
+        const formattedRecommendation = sentences.map(sentence => `- ${sentence}.`).join('\n');
+    
+        // Create one big message
+        const fullMessage = 
+          `🩺 Diagnosis: ${condition.name}\n` +
+          `⚡ Severity: ${severity.toUpperCase()}\n\n` +
+          `📝 Treatment Recommendations:\n${formattedRecommendation}`;
+    
+        // Send as one message
+        appendMessage(fullMessage, 'bot-message');
+
+        appendMessage("Do you have any additional questions?", 'bot-message');
+        showYesNoOptionsForLLM();
+
+      } else {
+        appendMessage("Diagnosis information not available.", 'bot-message');
+      }
+    }  
+
+
+    function showYesNoOptionsForLLM() {
+      const container = document.getElementById('dynamicOptions');
+      container.innerHTML = '';
+      container.style.display = 'flex';
+    
+      const yesBtn = document.createElement('button');
+      yesBtn.textContent = 'Yes';
+      yesBtn.onclick = () => {
+        container.style.display = 'none';
+        askUserForLLMQuestion();
+      };
+    
+      const noBtn = document.createElement('button');
+      noBtn.textContent = 'No';
+      noBtn.onclick = () => {
+        container.style.display = 'none';
+        appendMessage("Okay! Let me know if you need anything else.", 'bot-message');
+      };
+    
+      container.appendChild(yesBtn);
+      container.appendChild(noBtn);
+    }
+
+    function askUserForLLMQuestion() {
+      inLLMQuestionMode = true;
+      appendMessage("Please type your question below:", 'bot-message');
+    
+      document.getElementById('userInput').disabled = false;
+    
+      const listener = function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          const userInput = document.getElementById('userInput');
+          const question = userInput.value.trim();
+          userInput.value = '';
+          userInput.removeEventListener('keydown', listener);
+    
+          if (question !== '') {
+            appendMessage(question, 'user-message');
+            callLLM(question);
+            inLLMQuestionMode = false;
+          }
+        }
+      };
+    
+      document.getElementById('userInput').addEventListener('keydown', listener);
+    }
+
+    function callLLM(question) {
+      showTypingIndicator(); 
+      
+      fetch("/ask", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          // Add CSRF token if using Flask-WTF
+          "X-CSRFToken": document.querySelector('meta[name="csrf-token"]')?.content
+        },
+        body: JSON.stringify({ 
+          question,
+          session_id: getSessionId()
+        })
+      })
+      .then(res => {
+        // Log response status
+        console.log('LLM API Response Status:', res.status);
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        removeTypingIndicator();
+        console.log('LLM API Response:', data);
+
+        if (!data || !data.answer) {
+          throw new Error('Invalid response data');
+        }
+
+        // Show the main answer
+        const answer = data.answer;
+        if (answer.toLowerCase().includes("i do not know") || 
+            answer.toLowerCase().includes("i don't know")) {
+          appendMessage("I do not know. Please seek out advice from the nearest healthcare practitioner.", 'bot-message');
+        } else {
+          appendMessage(answer, 'bot-message');
+        }
+
+        // Show retrieved sources (optional, could hide behind a "debug" flag)
+        if (data.sources && data.sources.length > 0) {
+          let sourcesText = "Sources:\n";
+          data.sources.forEach((src, i) => {
+            sourcesText += `(${i + 1}) ${src.metadata?.heading || 'Unknown Section'} (Page ${src.metadata?.page || '?'})\n"${src.content}"\n\n`;
+          });
+          appendMessage(sourcesText.trim(), 'bot-message');
+        }
+
+        appendMessage("Do you have any additional questions?", 'bot-message');
+        showYesNoOptionsForLLM();
+      })
+      .catch(err => {
+        removeTypingIndicator();
+        
+        // Detailed error logging
+        console.error("LLM API Error:", {
+          message: err.message,
+          stack: err.stack,
+          type: err.name
+        });
+
+        // Network error detection
+        if (err instanceof TypeError && err.message === 'Failed to fetch') {
+          console.error('Network error - server may be down');
+          appendMessage("Unable to reach the server. Please check your connection and try again.", 'bot-message');
+        } else {
+          appendMessage("There was an error processing your request. Please try again.", 'bot-message');
+        }
+      });
+    }
+    
+  function showTypingIndicator() {
+  const existing = document.getElementById('typing-indicator');
+  if (existing) return;
+
+  console.log("Adding typing indicator...");
+
+  const chatBox = document.getElementById('chatBox');
+
+  const msg = document.createElement('div');
+  msg.className = 'message bot-message typing-indicator';
+  msg.id = 'typing-indicator';
+
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'typing-dot';
+    msg.appendChild(dot);
+  }
+
+  chatBox.appendChild(msg);
+
+  setTimeout(() => {
+    console.log("Typing indicator now shown.");
+    msg.classList.add('show'); // This triggers animation
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 10);
+}
+
+function removeTypingIndicator() {
+  const indicator = document.getElementById('typing-indicator');
+  if (indicator) {
+    indicator.remove();
+  }
+}
+  /// Testing ////// ////// ////// ////// ////// ////// ////// ////// ////// ////// ////// //////
+  
+ // window.onload = function () {
+    // Bot's initial message
+   // appendMessage("Can I help?", 'bot-message');
+   
+//  };
+
+  //document.getElementById('userInput').addEventListener('keydown', function(event) {
+   // if (event.key === 'Enter') {
+   //   event.preventDefault(); // Prevent newline if it's a textarea (not needed if input)
+   //   sendMessage();
+   // }
+ /// });
 </script>
 
 {% endblock %}

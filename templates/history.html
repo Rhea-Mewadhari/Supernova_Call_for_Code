@@ -38,7 +38,7 @@
 </style>
 <script>
     function startNewChat() {
-        window.location.href = '/newchat';// Replace '/new_chat' with the URL for your new chat page
+        window.location.href = "{{ url_for('page.newchat') }}";
     }
     window.watsonAssistantChatOptions = {
       integrationID: "2471a3ab-6e0b-4be6-a172-3304f884337b", // The ID of this integration.
@@ -131,7 +131,7 @@
   </div>
 <script>
     function viewChatHistory(email, session_id) {
-    fetch('/get-chat-history', {
+    fetch('{{ url_for("chat.get_chat_history") }}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -147,7 +147,7 @@
 
         const startTime = Date.now();
 
-        fetch('{{ url_for("update_profile") }}', {
+        fetch('{{ url_for("user.update_profile") }}', {
             method: 'POST',
             body: formData
         })
