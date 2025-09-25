@@ -1,4 +1,4 @@
-# app/services/user_service.py
+# services/user_service.py
 
 import cloudinary.uploader
 from werkzeug.security import generate_password_hash

@@ -1,4 +1,4 @@
-# app/services/prediction_service.py
+# services/prediction_service.py
 
 import json
 from gradio_client import Client

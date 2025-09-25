@@ -1,4 +1,4 @@
-# app/services/db_service.py
+# services/db_service.py
 
 from flask import current_app
 from pymongo import MongoClient
