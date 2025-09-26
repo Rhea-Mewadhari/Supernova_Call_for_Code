@@ -1,4 +1,4 @@
-# app/routes/chat_routes.py
+# routes/chat_routes.py
 
 from flask import Blueprint, request, jsonify
 from services.vectordb_service import VectorDBService

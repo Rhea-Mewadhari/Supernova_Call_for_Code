@@ -1,4 +1,4 @@
-# app/routes/page_routes.py
+# routes/page_routes.py
 
 from flask import Blueprint, render_template, redirect, url_for, session
 from services.db_service import get_db 

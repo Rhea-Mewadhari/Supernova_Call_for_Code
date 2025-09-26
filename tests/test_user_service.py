@@ -2,6 +2,8 @@ import io
 import pytest
 from unittest.mock import patch, MagicMock
 from datetime import datetime
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from Supernova_Call_for_Code.services import user_service
 

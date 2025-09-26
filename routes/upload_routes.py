@@ -1,4 +1,4 @@
-# app/routes/upload_routes.py
+# routes/upload_routes.py
 
 from flask import Blueprint, request, session, jsonify, current_app
 from services.prediction_service import predict_image

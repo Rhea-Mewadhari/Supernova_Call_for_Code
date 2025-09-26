@@ -1,4 +1,4 @@
-# app/routes/auth_routes.py
+# routes/auth_routes.py
 
 from flask import Blueprint, request, render_template, session, redirect, url_for, flash, current_app
 from services.user_service import create_user_document, hash_password
